@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "../index.scss";
 
 const CreateProfile = () => {
+  const [showWelcome, setShowWelcome] = useState(true);
   const [name, setName] = useState("");
   const [showName, setShowName] = useState(false);
   const [email, setEmail] = useState("");
@@ -25,17 +26,43 @@ const CreateProfile = () => {
   const [showLicense, setShowLicense] = useState(false);
 
   const [summary, showSummary] = useState(false);
+
+  const handleKeyDown = async (e) => {
+    if (e.key !== "Enter") return;
+    const value = e.target.value;
+    if (!value.trim()) return;
+    setInterests([...interests, value]);
+    console.log(interests);
+    e.target.value = "";
+  };
+
+  const removeKeyword = (deleteIndex) => {
+    setInterests(interests.filter((keyword, index) => index !== deleteIndex));
+  };
+
   return (
     <section className="createprofile">
       <Navbar />
       <h1 className="title">{!name ? "Welcome." : `Welcome, ${name}.`}</h1>
-      <p>r u ready kids</p>
-      <div className="flex-row-center"></div>
-      <button className="btn-cta" onClick={() => setShowName(true)}>
-        I'm Ready
-      </button>
-      <p>{name}</p>
-      <p>{email}</p>
+      {showWelcome ? (
+        <>
+          <h3>Get ready to connect</h3>
+          <div className="flex-row-center">
+            <button
+              className="btn-cta"
+              onClick={() => {
+                setShowWelcome(false);
+                setShowName(true);
+              }}
+            >
+              I'm Ready
+            </button>
+          </div>
+        </>
+      ) : (
+        ""
+      )}
+
       <p>{interests[0]}</p>
       <p>{skills[0]}</p>
       <p>{certifications[0]}</p>
@@ -45,12 +72,14 @@ const CreateProfile = () => {
       <form
         action="
       "
+        className="create-profile__form"
       >
         {showName ? (
           <>
             <label htmlFor="name" className="create-profile__label">
               What's your name?
             </label>
+            <br />
             <input
               type="text"
               className="create-profile__input"
@@ -76,6 +105,7 @@ const CreateProfile = () => {
             <label htmlFor="name" className="create-profile__label">
               Please enter your email:
             </label>
+            <br />
             <input
               type="text"
               className="create-profile__input"
@@ -98,9 +128,22 @@ const CreateProfile = () => {
         )}
         {showInterests ? (
           <>
-            <label htmlFor="name" className="create-profile__label">
+            <label htmlFor="interests" className="create-profile__label">
               What are your interests? (Press ENTER)
             </label>
+            <div className="words-container">
+              {interests?.map((word, index) => (
+                <div className="words-item" key={index}>
+                  <span className="words-text">{word}</span>
+                  <span
+                    onClick={() => removeKeyword(index)}
+                    className="words-delete"
+                  >
+                    &times;
+                  </span>
+                </div>
+              ))}
+            </div>
             <p>existing options...</p>
             <input
               type="text"
