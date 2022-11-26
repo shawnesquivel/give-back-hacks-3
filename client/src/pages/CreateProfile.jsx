@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
 import "../index.scss";
 import axios from "../api/axios";
 
@@ -27,7 +26,7 @@ const CreateProfile = () => {
 
   // const [certifcationFile, setCertificationFile] = useState("");
   const [showCertificationFile, setShowCertificationFile] = useState(false);
-  const [address, setAddress] = useState("");
+  const [address, setAddress] = useState("123 Washington St");
   const [showAddress, setShowAddress] = useState(false);
   const [dob, setDob] = useState("1990-11-27");
   // const [showDob, setShowDob] = useState(false);
@@ -129,6 +128,7 @@ const CreateProfile = () => {
 
       <form
         action="
+        submit
       "
         className="create-profile__form"
       >
@@ -142,6 +142,7 @@ const CreateProfile = () => {
               type="text"
               className="create-profile__input"
               onChange={(e) => setName(e.target.value)}
+              value={name}
             />
             <div className="flex-row-center">
               <button
@@ -165,9 +166,10 @@ const CreateProfile = () => {
             </label>
             <br />
             <input
-              type="text"
+              type="password"
               className="create-profile__input"
               onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
             />
             <div className="flex-row-center">
               <button
@@ -192,6 +194,7 @@ const CreateProfile = () => {
             <br />
             <input
               type="text"
+              value={email}
               className="create-profile__input"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -326,6 +329,7 @@ const CreateProfile = () => {
               type="text"
               className="create-profile__input"
               onChange={(e) => setCertificationType(e.target.value)}
+              value={certificationType}
             />
 
             <label htmlFor="certExpiry" className="create-profile__label">
@@ -335,6 +339,7 @@ const CreateProfile = () => {
               type="date"
               className="create-profile__input"
               onChange={(e) => setCertificationExpiry(e.target.value)}
+              value={certificationExpiry}
             />
             <button className="btn-secondary">Add Another</button>
             <div className="flex-row-center">
@@ -398,11 +403,19 @@ const CreateProfile = () => {
           <>
             <div className="label-col-container">
               <label htmlFor="address">What is your address?</label>
-              <input type="text" onChange={(e) => setAddress(e.target.value)} />
+              <input
+                type="text"
+                onChange={(e) => setAddress(e.target.value)}
+                value={address}
+              />
             </div>
             <div className="label-col-container">
               <label htmlFor="dob">What is your DOB?</label>
-              <input type="text" onChange={(e) => setDob(e.target.value)} />
+              <input
+                type="text"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
             </div>
             <button
               className="btn-cta"
@@ -436,10 +449,10 @@ const CreateProfile = () => {
             <button
               className="btn-cta"
               type="submit"
-              onClick={() => {
+              onClick={(e) => {
                 setShowLicense(false);
                 setSuccess(true);
-                handleCreateProfile();
+                handleCreateProfile(e);
               }}
             >
               Finish
@@ -449,7 +462,7 @@ const CreateProfile = () => {
           ""
         )}
 
-        {success ? <h1>User Created</h1> : ""}
+        {success ? <h1>User Created!</h1> : ""}
       </form>
     </section>
   );

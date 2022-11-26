@@ -14,6 +14,8 @@ const MONGOOSE_URL = "mongodb://127.0.0.1:27017/GiveBackHacks3";
 const moment = require("moment");
 const Project = require("./model/project");
 const User = require("./model/User");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // app
 app.use(
@@ -53,7 +55,6 @@ app.post("/api/register", async (req, res) => {
   console.log("Registration Received: req.body:", req.body);
   let {
     pwd: plainTextPwd,
-    role,
     name,
     email,
     interests,
@@ -73,7 +74,6 @@ app.post("/api/register", async (req, res) => {
     const res = await User.create({
       username: email,
       password: encryptedPwd,
-      roles: role,
       name,
       interests,
       skills,
@@ -96,6 +96,48 @@ app.post("/api/register", async (req, res) => {
     throw err;
   }
   res.json({ status: "OK" });
+});
+
+app.post("/api/login", async (req, res) => {
+  const { user, pwd } = req.body;
+  console.log("Server received login request:", user, pwd);
+
+  // Find the User record
+  // .lean() returns a Plain Old Java Object (POJO) instead of the entire
+  const userRecord = await User.findOne({ username: user }).exec();
+
+  console.log("User in Database:", userRecord);
+
+  if (!userRecord) {
+    return res.json({
+      status: "error",
+      error: "username/pwd is incorrect",
+    });
+  }
+
+  // Compares the password and the hashed password
+  if (await bcrypt.compare(pwd, userRecord.password)) {
+    // Public information, do not put sensitive info.
+    // The JWT signs the header/payload based on our signature.
+    const token = jwt.sign(
+      {
+        id: userRecord._id,
+        username: userRecord.username,
+      },
+      process.env.JWT_SECRET_KEY
+    );
+    console.log(token);
+    if (token) {
+      console.log("✅ signed JWT");
+
+      res.json({ status: "OK", token: token });
+    } else {
+      console.log("❌ didnt sign jwt");
+    }
+  } else {
+    console.log("inside the err2");
+    return res.json({ status: "error" });
+  }
 });
 
 // port

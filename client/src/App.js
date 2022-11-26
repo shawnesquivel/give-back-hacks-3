@@ -7,11 +7,13 @@ import Dashboard from "./pages/Dashboard";
 import Browse from "./pages/Browse";
 import Profile from "./pages/Profile";
 import CreateProject from "./pages/CreateProject";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
       <Route exact path="/createprofile" element={<CreateProfile />}></Route>
       <Route path="/createprofile/2" element={<CreateProfilePageTwo />} />
       <Route path="/createprofile" element={<CreateProfile />} />

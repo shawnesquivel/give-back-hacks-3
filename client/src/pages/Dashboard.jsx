@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import CurrentProjects from "../components/CurrentProjects";
+import NavbarColumn from "../components/NavbarColumn";
+import { Link } from "react-router-dom";
+const GETUSER_URL = "/api/getuser";
 
-import Navbar from "../components/Navbar";
 const Dashboard = () => {
   return (
     <div>
-      <Navbar />
+      <NavbarColumn />
       <h1>Dashboard</h1>
+      <Link to="/profile">Profile</Link>
+      <Link to="/settings">Settings</Link>
+      <CurrentProjects />
     </div>
   );
 };

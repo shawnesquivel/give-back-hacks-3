@@ -4,7 +4,7 @@ import "../index.scss";
 
 const Navbar = () => {
   return (
-    <nav className="links">
+    <nav className="links--col">
       <Link className="link" to="/">
         Home
       </Link>

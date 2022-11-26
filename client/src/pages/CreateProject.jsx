@@ -1,11 +1,24 @@
 import React from "react";
 
 import Navbar from "../components/Navbar";
+import CreateProjectForm from "../components/CreateProjectForm";
+import ProjectCard from "../components/ProjectCard";
 const CreateProject = () => {
   return (
     <div>
       <Navbar />
       <h1>Create Project</h1>
+
+      <div>
+        <h1>Select EIther</h1>
+        <button>Create New</button>
+        <button>Use Past Projects</button>
+      </div>
+      <div>
+        <h1>Drafts</h1>
+        <ProjectCard />
+      </div>
+      <CreateProjectForm />
     </div>
   );
 };
