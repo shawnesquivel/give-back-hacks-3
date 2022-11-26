@@ -2,33 +2,40 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 import "../index.scss";
+import axios from "../api/axios";
+
+const REGISTER_URL = "/api/register";
 
 const CreateProfile = () => {
   const [showWelcome, setShowWelcome] = useState(true);
-  const [name, setName] = useState("");
+  const [name, setName] = useState("Shawn");
   const [showName, setShowName] = useState(false);
-  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("password");
+  const [showPwd, setShowPwd] = useState(false);
+  const [email, setEmail] = useState("user@gmail.com");
   const [showEmail, setShowEmail] = useState(false);
-  const [interests, setInterests] = useState([]);
+  const [interests, setInterests] = useState(["animals", "homelessness"]);
   const [showInterests, setShowInterests] = useState(false);
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState(["cooking", "managing"]);
   const [showSkills, setShowSkills] = useState(false);
 
-  const [certifications, setCertifications] = useState("");
+  // const [certifications, setCertifications] = useState("");
   const [showCertifications, setShowCertifications] = useState(false);
-  const [certificationType, setCertificationType] = useState("");
-  const [certificationDescription, setCertificationDescription] = useState("");
+  const [certificationType, setCertificationType] =
+    useState("FoodSafe Level 3");
   const [certificationExpiry, setCertificationExpiry] = useState("2023-11-26");
 
-  const [certiifcationFile, setCertificationFile] = useState("");
+  // const [certifcationFile, setCertificationFile] = useState("");
   const [showCertificationFile, setShowCertificationFile] = useState(false);
   const [address, setAddress] = useState("");
   const [showAddress, setShowAddress] = useState(false);
   const [dob, setDob] = useState("1990-11-27");
-  const [showDob, setShowDob] = useState(false);
-  const [license, setLicense] = useState("");
+  // const [showDob, setShowDob] = useState(false);
+  // const [license, setLicense] = useState("");
   const [showLicense, setShowLicense] = useState(false);
 
+  const [uploadedCert, setUploadedCert] = useState(false);
+  const [uploadedLicense, setUploadedLicense] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const handleKeyDown = async (e) => {
@@ -60,6 +67,43 @@ const CreateProfile = () => {
     }
   };
 
+  const handleCreateProfile = async (e) => {
+    e.preventDefault();
+
+    try {
+      const payload = JSON.stringify({
+        name,
+        pwd,
+        email,
+        interests,
+        skills,
+        certificationType,
+        certificationExpiry,
+        certificationFile:
+          "https://www.foodsafe.ca/assets/images/wallet-card.jpg",
+        address,
+        dob,
+        license:
+          "https://saaq.gouv.qc.ca/fileadmin/documents/_processed_/2/9/csm_permis_regulier_5a8f3c69a5.jpg",
+      });
+      console.log(payload);
+      const response = await axios.post(REGISTER_URL, payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      console.log(response);
+      if (response.status === 200) {
+        setSuccess(true);
+      } else {
+        alert(response.status);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <section className="createprofile">
       <Navbar />
@@ -83,12 +127,6 @@ const CreateProfile = () => {
         ""
       )}
 
-      <p>{interests[0]}</p>
-      <p>{skills[0]}</p>
-      <p>{certifications[0]}</p>
-      <p>{address}</p>
-      <p>{license}</p>
-
       <form
         action="
       "
@@ -110,6 +148,32 @@ const CreateProfile = () => {
                 className="btn-cta"
                 onClick={() => {
                   setShowName(false);
+                  setShowPwd(true);
+                }}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+        {showPwd ? (
+          <>
+            <label htmlFor="pwd" className="create-profile__label">
+              Enter a password
+            </label>
+            <br />
+            <input
+              type="text"
+              className="create-profile__input"
+              onChange={(e) => setPwd(e.target.value)}
+            />
+            <div className="flex-row-center">
+              <button
+                className="btn-cta"
+                onClick={() => {
+                  setShowPwd(false);
                   setShowEmail(true);
                 }}
               >
@@ -122,7 +186,7 @@ const CreateProfile = () => {
         )}
         {showEmail ? (
           <>
-            <label htmlFor="name" className="create-profile__label">
+            <label htmlFor="email" className="create-profile__label">
               Please enter your email:
             </label>
             <br />
@@ -154,7 +218,7 @@ const CreateProfile = () => {
             <input
               id="interests"
               type="text"
-              className="create-profile__input"
+              className="interests-input"
               onKeyDown={handleKeyDown}
             />
             <div className="words-container">
@@ -170,6 +234,17 @@ const CreateProfile = () => {
                 </div>
               ))}
             </div>
+            {/* not sure why "ENTER" only works when there is stuff between the button and the input */}
+            <div className="offscreen">
+              <label htmlFor="tags" className="form__label">
+                Required Profile Tags (Press Enter ⏎)
+              </label>
+              <input
+                type="text"
+                className="tags-input"
+                placeholder="Add a tag"
+              />
+            </div>
 
             <div className="flex-row-center">
               <button
@@ -177,6 +252,59 @@ const CreateProfile = () => {
                 type="button"
                 onClick={() => {
                   setShowInterests(false);
+                  setShowSkills(true);
+                }}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+
+        {showSkills ? (
+          <>
+            <label htmlFor="skills" className="create-profile__label">
+              What are your skills? (Press ENTER)
+            </label>
+            <input
+              id="skills"
+              type="text"
+              className="skills-input"
+              onKeyDown={handleKeyDown}
+            />
+            <div className="words-container">
+              {skills?.map((word, index) => (
+                <div className="words-item" key={index}>
+                  <span className="words-text">{word}</span>
+                  <span
+                    onClick={(e) => removeKeyword(e, index)}
+                    className="skills-delete"
+                  >
+                    &times;
+                  </span>
+                </div>
+              ))}
+            </div>
+            {/* not sure why "ENTER" only works when there is stuff between the button and the input */}
+            <div className="offscreen">
+              <label htmlFor="tags" className="form__label">
+                Required Profile Tags (Press Enter ⏎)
+              </label>
+              <input
+                type="text"
+                className="tags-input"
+                placeholder="Add a tag"
+              />
+            </div>
+
+            <div className="flex-row-center">
+              <button
+                className="btn-cta"
+                type="button"
+                onClick={() => {
+                  setShowSkills(false);
                   setShowCertifications(true);
                 }}
               >
@@ -187,6 +315,7 @@ const CreateProfile = () => {
         ) : (
           ""
         )}
+
         {showCertifications ? (
           <>
             <h1>Do you have any certifications?</h1>
@@ -198,19 +327,12 @@ const CreateProfile = () => {
               className="create-profile__input"
               onChange={(e) => setCertificationType(e.target.value)}
             />
-            <label htmlFor="certDescription" className="create-profile__label">
-              Description
-            </label>
-            <input
-              type="text"
-              className="create-profile__input"
-              onChange={(e) => setCertificationDescription(e.target.value)}
-            />
+
             <label htmlFor="certExpiry" className="create-profile__label">
               Expiration Date
             </label>
             <input
-              type="text"
+              type="date"
               className="create-profile__input"
               onChange={(e) => setCertificationExpiry(e.target.value)}
             />
@@ -246,11 +368,13 @@ const CreateProfile = () => {
             <label htmlFor="certFile">Upload</label>
             <input type="file" />
             <button
+              className={!uploadedCert ? "btn-upload" : "btn-success"}
+              type="button"
               onClick={() => {
-                console.log("file uploaded");
+                setUploadedCert(true);
               }}
             >
-              Upload
+              {!uploadedCert ? "upload img" : "✅ success"}
             </button>
 
             <div className="flex-row-center">
@@ -272,11 +396,14 @@ const CreateProfile = () => {
 
         {showAddress ? (
           <>
-            <label htmlFor="address">What's you address?</label>
-            <input type="text" onChange={(e) => setAddress(e.target.value)} />
-            <label htmlFor="dob">What's you DOB?</label>
-            <input type="text" onChange={(e) => setDob(e.target.value)} />
-
+            <div className="label-col-container">
+              <label htmlFor="address">What is your address?</label>
+              <input type="text" onChange={(e) => setAddress(e.target.value)} />
+            </div>
+            <div className="label-col-container">
+              <label htmlFor="dob">What is your DOB?</label>
+              <input type="text" onChange={(e) => setDob(e.target.value)} />
+            </div>
             <button
               className="btn-cta"
               onClick={() => {
@@ -295,11 +422,24 @@ const CreateProfile = () => {
           <>
             <label htmlFor="license">Upload ID</label>
             <input type="file" />
+
+            <button
+              className={!uploadedLicense ? "btn-upload" : "btn-success"}
+              type="button"
+              onClick={() => {
+                setUploadedLicense(true);
+              }}
+            >
+              {!uploadedLicense ? "upload license" : "✅ success"}
+            </button>
+
             <button
               className="btn-cta"
+              type="submit"
               onClick={() => {
                 setShowLicense(false);
                 setSuccess(true);
+                handleCreateProfile();
               }}
             >
               Finish
