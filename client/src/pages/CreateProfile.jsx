@@ -13,8 +13,12 @@ const CreateProfile = () => {
   const [showInterests, setShowInterests] = useState(false);
   const [skills, setSkills] = useState([]);
   const [showSkills, setShowSkills] = useState(false);
+
   const [certifications, setCertifications] = useState("");
   const [showCertifications, setShowCertifications] = useState(false);
+  const [certificationType, setCertificationType] = useState("");
+  const [certificationDescription, setCertificationDescription] = useState("");
+  const [certificationExpiry, setCertificationExpiry] = useState("2023-11-26");
 
   const [certiifcationFile, setCertificationFile] = useState("");
   const [showCertificationFile, setShowCertificationFile] = useState(false);
@@ -25,19 +29,35 @@ const CreateProfile = () => {
   const [license, setLicense] = useState("");
   const [showLicense, setShowLicense] = useState(false);
 
-  const [summary, showSummary] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleKeyDown = async (e) => {
     if (e.key !== "Enter") return;
+
     const value = e.target.value;
+
     if (!value.trim()) return;
-    setInterests([...interests, value]);
-    console.log(interests);
+
+    if (e.target.className === "interests-input") {
+      setInterests([...interests, value]);
+      console.log(interests);
+    }
+
+    if (e.target.className === "skills-input") {
+      setSkills([...skills, value]);
+      console.log(skills);
+    }
+
     e.target.value = "";
   };
 
-  const removeKeyword = (deleteIndex) => {
-    setInterests(interests.filter((keyword, index) => index !== deleteIndex));
+  const removeKeyword = (e, deleteIndex) => {
+    if (e.target.className === "interests-delete") {
+      setInterests(interests.filter((keyword, index) => index !== deleteIndex));
+    }
+    if (e.target.className === "skills-delete") {
+      setInterests(interests.filter((keyword, index) => index !== deleteIndex));
+    }
   };
 
   return (
@@ -131,28 +151,30 @@ const CreateProfile = () => {
             <label htmlFor="interests" className="create-profile__label">
               What are your interests? (Press ENTER)
             </label>
+            <input
+              id="interests"
+              type="text"
+              className="create-profile__input"
+              onKeyDown={handleKeyDown}
+            />
             <div className="words-container">
               {interests?.map((word, index) => (
                 <div className="words-item" key={index}>
                   <span className="words-text">{word}</span>
                   <span
-                    onClick={() => removeKeyword(index)}
-                    className="words-delete"
+                    onClick={(e) => removeKeyword(e, index)}
+                    className="interests-delete"
                   >
                     &times;
                   </span>
                 </div>
               ))}
             </div>
-            <p>existing options...</p>
-            <input
-              type="text"
-              className="create-profile__input"
-              onChange={(e) => setEmail(e.target.value)}
-            />
+
             <div className="flex-row-center">
               <button
                 className="btn-cta"
+                type="button"
                 onClick={() => {
                   setShowInterests(false);
                   setShowCertifications(true);
@@ -167,17 +189,42 @@ const CreateProfile = () => {
         )}
         {showCertifications ? (
           <>
-            <label htmlFor="name" className="create-profile__label">
-              What are your certifications? (Press ENTER)
+            <h1>Do you have any certifications?</h1>
+            <label htmlFor="certType" className="create-profile__label">
+              Type
             </label>
-            <p>existing options...</p>
             <input
               type="text"
               className="create-profile__input"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setCertificationType(e.target.value)}
             />
-            <button>Add Another</button>
+            <label htmlFor="certDescription" className="create-profile__label">
+              Description
+            </label>
+            <input
+              type="text"
+              className="create-profile__input"
+              onChange={(e) => setCertificationDescription(e.target.value)}
+            />
+            <label htmlFor="certExpiry" className="create-profile__label">
+              Expiration Date
+            </label>
+            <input
+              type="text"
+              className="create-profile__input"
+              onChange={(e) => setCertificationExpiry(e.target.value)}
+            />
+            <button className="btn-secondary">Add Another</button>
             <div className="flex-row-center">
+              <button
+                onClick={() => {
+                  setShowInterests(true);
+                  setShowCertifications(false);
+                }}
+                className="btn-cta"
+              >
+                Back
+              </button>
               <button
                 className="btn-cta"
                 onClick={() => {
@@ -192,6 +239,77 @@ const CreateProfile = () => {
         ) : (
           ""
         )}
+
+        {showCertificationFile ? (
+          <>
+            <h1>Hi, {name}</h1>
+            <label htmlFor="certFile">Upload</label>
+            <input type="file" />
+            <button
+              onClick={() => {
+                console.log("file uploaded");
+              }}
+            >
+              Upload
+            </button>
+
+            <div className="flex-row-center">
+              <button className="btn-cta">Back</button>
+              <button
+                className="btn-cta"
+                onClick={() => {
+                  setShowCertificationFile(false);
+                  setShowAddress(true);
+                }}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+
+        {showAddress ? (
+          <>
+            <label htmlFor="address">What's you address?</label>
+            <input type="text" onChange={(e) => setAddress(e.target.value)} />
+            <label htmlFor="dob">What's you DOB?</label>
+            <input type="text" onChange={(e) => setDob(e.target.value)} />
+
+            <button
+              className="btn-cta"
+              onClick={() => {
+                setShowAddress(false);
+                setShowLicense(true);
+              }}
+            >
+              Next
+            </button>
+          </>
+        ) : (
+          ""
+        )}
+
+        {showLicense ? (
+          <>
+            <label htmlFor="license">Upload ID</label>
+            <input type="file" />
+            <button
+              className="btn-cta"
+              onClick={() => {
+                setShowLicense(false);
+                setSuccess(true);
+              }}
+            >
+              Finish
+            </button>
+          </>
+        ) : (
+          ""
+        )}
+
+        {success ? <h1>User Created</h1> : ""}
       </form>
     </section>
   );

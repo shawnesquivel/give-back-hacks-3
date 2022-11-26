@@ -32,14 +32,21 @@
   border-bottom: 1px solid grey;
 }
 
-.btn-cta {
-  min-width: 100px;
-  max-width: 150px;
+.btn {
+  border-radius: 15px;
   border: none;
-  border-radius: 10px;
   padding: 0.3rem 0.5rem;
-  background-color: rgba(0, 0, 0, 0.74);
-  color: white;
+
+  &-cta {
+    min-width: 100px;
+    max-width: 150px;
+    background-color: rgba(0, 0, 0, 0.74);
+    color: white;
+  }
+  &-secondary {
+    min-width: 100px;
+    max-width: 150px;
+  }
 }
 
 .create-profile {
