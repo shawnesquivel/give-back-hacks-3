@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 
 const CreateProjectForm = () => {
+  // PAGES
+  const [showPageOne, setShowPageOne] = useState(true);
+  const [showPageTwo, setShowPageTwo] = useState(false);
+
+  const [showPageThree, setShowPageThree] = useState(false);
+  const [showPageFour, setShowPageFour] = useState(false);
+  const [showPageFive, setShowPageFive] = useState(false);
+
   // PAGE ONE
   const [title, setTitle] = useState("Clothing Drive");
   const [date, setDate] = useState("2022-12-25");
@@ -66,13 +74,6 @@ const CreateProjectForm = () => {
     console.log("Items You Need :", itemsYouNeedArray);
   }, [itemsYouHaveArray, itemsYouNeedArray]);
 
-  const [showPageOne, setShowPageOne] = useState(true);
-  const [showPageTwo, setShowPageTwo] = useState(false);
-
-  const [showPageThree, setShowPageThree] = useState(false);
-  const [showPageFour, setShowPageFour] = useState(false);
-  const [showPageFive, setShowPageFive] = useState(false);
-
   const generateTableRowJSX = (item, qty, description) => {
     return (
       <tr key={Math.floor(Math.random() * 100000)}>
@@ -93,6 +94,87 @@ const CreateProjectForm = () => {
       </tr>
     );
   };
+
+  //   PAGE FOUR: VOLUNTEERS
+  const [volunteersYouHaveArray, setVolunteersYouHaveArray] = useState([]);
+  const [volunteersYouNeedArray, setVolunteersYouNeedArray] = useState([]);
+
+  const [volunteerPosition, setVolunteerPosition] = useState("");
+  const [volunteerQty, setVolunteerQty] = useState("");
+  const [volunteerCertification, setVolunteerCertification] = useState("");
+  const [volunteerDescription, setVolunteerDescription] = useState("");
+
+  const [volunteerNeedPosition, setVolunteerNeedPosition] = useState("");
+  const [volunteerNeedQty, setVolunteerNeedQty] = useState("");
+  const [volunteerNeedCertification, setVolunteerNeedCertification] =
+    useState("");
+  const [volunteerNeedDescription, setVolunteerNeedDescription] = useState("");
+
+  const addToVolunteersYouHaveArray = (
+    position,
+    qty,
+    certification,
+    description
+  ) => {
+    setVolunteersYouHaveArray([
+      ...volunteersYouHaveArray,
+      {
+        position,
+        qty,
+        certification,
+        description,
+      },
+    ]);
+
+    setVolunteerPosition("");
+    setVolunteerQty("");
+    setVolunteerCertification("");
+    setVolunteerDescription("");
+  };
+
+  const addToVolunteersYouNeedArray = (
+    position,
+    qty,
+    certification,
+    description
+  ) => {
+    setVolunteersYouNeedArray([
+      ...volunteersYouNeedArray,
+      {
+        position,
+        qty,
+        certification,
+        description,
+      },
+    ]);
+
+    setVolunteerNeedPosition("");
+    setVolunteerNeedQty("");
+    setVolunteerNeedCertification("");
+    setVolunteerNeedDescription("");
+  };
+
+  useEffect(() => {
+    console.log("volunteers you have:", volunteersYouHaveArray);
+  }, [volunteersYouHaveArray]);
+
+  const generateVolunteersTableRowJSX = (
+    position,
+    qty,
+    certification,
+    description
+  ) => (
+    <tr key={Math.floor(Math.random() * 100000)}>
+      <td>{position}</td>
+      <td>{qty}</td>
+      <td>{certification}</td>
+      <td>{description}</td>
+    </tr>
+  );
+
+  //   PAGE 5: ADDITIONAL HELP WANTED
+  const [showSpecificHelp, setShowSpecificHelp] = useState(false);
+  const [issue, setIssue] = useState("");
 
   return (
     <div>
@@ -381,6 +463,220 @@ const CreateProjectForm = () => {
           </>
         ) : (
           " "
+        )}
+
+        {showPageFour ? (
+          <>
+            <h1>Volunteers</h1>
+            <h4>Volunteers You Already Have</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Position</th>
+                  <th>#</th>
+                  <th>Certification</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {volunteersYouHaveArray?.map((item, index) =>
+                  generateVolunteersTableRowJSX(
+                    item.position,
+                    item.qty,
+                    item.certification,
+                    item.description
+                  )
+                )}
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="position"
+                      value={volunteerPosition}
+                      onChange={(e) => setVolunteerPosition(e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="qty"
+                      value={volunteerQty}
+                      onChange={(e) => setVolunteerQty(e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="certification"
+                      value={volunteerCertification}
+                      onChange={(e) =>
+                        setVolunteerCertification(e.target.value)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="description"
+                      value={volunteerDescription}
+                      onChange={(e) => setVolunteerDescription(e.target.value)}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button
+              className=""
+              type="button"
+              onClick={() => {
+                addToVolunteersYouHaveArray(
+                  volunteerPosition,
+                  volunteerQty,
+                  volunteerCertification,
+                  volunteerDescription
+                );
+              }}
+            >
+              Add Volunteer
+            </button>
+
+            <h4>Volunteers You Already Have</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Position</th>
+                  <th>#</th>
+                  <th>Certification</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {volunteersYouNeedArray?.map((item, index) =>
+                  generateVolunteersTableRowJSX(
+                    item.position,
+                    item.qty,
+                    item.certification,
+                    item.description
+                  )
+                )}
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="position"
+                      value={volunteerNeedPosition}
+                      onChange={(e) => setVolunteerNeedPosition(e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="qty"
+                      value={volunteerNeedQty}
+                      onChange={(e) => setVolunteerNeedQty(e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="certification"
+                      value={volunteerNeedCertification}
+                      onChange={(e) =>
+                        setVolunteerNeedCertification(e.target.value)
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="description"
+                      value={volunteerNeedDescription}
+                      onChange={(e) =>
+                        setVolunteerNeedDescription(e.target.value)
+                      }
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button
+              className=""
+              type="button"
+              onClick={() => {
+                addToVolunteersYouNeedArray(
+                  volunteerNeedPosition,
+                  volunteerNeedQty,
+                  volunteerNeedCertification,
+                  volunteerNeedDescription
+                );
+              }}
+            >
+              Add Volunteer
+            </button>
+
+            <div className="btn-container">
+              <p>Save as draft</p>
+              <button
+                className="btn-cta"
+                onClick={() => {
+                  setShowPageFour(false);
+                  setShowPageFive(true);
+                }}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+
+        {showPageFive ? (
+          <>
+            <h1>Help Wanted</h1>
+            <h4>Select all the apply</h4>
+
+            <div className="btn-container">
+              <button type="button" onClick={() => setShowSpecificHelp(true)}>
+                Specific Help
+              </button>
+              <p>or</p>
+              <button>None Required</button>
+            </div>
+
+            {showSpecificHelp ? (
+              <>
+                <div className="label-col-container">
+                  <label htmlFor="issue">Issue Name</label>
+                  <input
+                    type="issue"
+                    onChange={(e) => setIssue(e.target.value)}
+                    value={issue}
+                  />
+                </div>
+
+                <button type="button" className="btn-cta">
+                  Add Issue
+                </button>
+              </>
+            ) : (
+              " "
+            )}
+            <div className="btn-container">
+              <p>Save as draft</p>
+              <button
+                className="btn-cta"
+                onClick={() => {
+                  setShowPageFour(false);
+                  setShowPageFive(true);
+                }}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        ) : (
+          ""
         )}
       </form>
     </div>
