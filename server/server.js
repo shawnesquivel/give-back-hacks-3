@@ -35,10 +35,14 @@ mongoose
   .catch((err) => console.log(err));
 
 // middleware
-app.use("/", express.static(path.join(__dirname, "static")));
+app.use("/api/", express.static(path.join(__dirname, "static")));
 
 app.listen(port, () => {
   console.log(`Server is online at Port ${port}`);
+});
+
+app.get("/", (req, res) => {
+  res.send("welcome!");
 });
 
 // routes
