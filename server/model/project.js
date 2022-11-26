@@ -1,6 +1,6 @@
-const mongoose = require("monogose");
+const mongoose = require("mongoose");
 
-const ProjectSchema = new mongoose.ProjectSchema(
+const ProjectSchema = new mongoose.Schema(
   {
     title: String,
     tasks: [String],

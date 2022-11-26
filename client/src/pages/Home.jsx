@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import axios from "../api/axios";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   useEffect(() => {
@@ -27,8 +28,12 @@ const Home = () => {
   return (
     <div>
       <h1>Homepage</h1>
-
       <Navbar />
+      <button className="btn-cta">
+        <Link className="link" to="/createprofile">
+          Create Profile
+        </Link>
+      </button>
     </div>
   );
 };
