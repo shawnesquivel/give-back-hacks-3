@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 const CreateProjectForm = () => {
   // PAGE ONE
@@ -17,12 +18,81 @@ const CreateProjectForm = () => {
     "Rental cost from home depot"
   );
 
+  //   PAGE THREE
+
+  const [itemName, setItemName] = useState("");
+  const [itemQty, setItemQty] = useState("");
+  const [itemDescription, setItemDescription] = useState("");
+  const [itemNeedName, setItemNeedName] = useState("");
+  const [itemNeedQty, setItemNeedQty] = useState("");
+  const [itemNeedDescription, setItemNeedDescription] = useState("");
+  const [itemNeedPrice, setItemNeedPrice] = useState("");
+
+  const [itemsYouHaveArray, setItemsYouHaveArray] = useState([]);
+  const [itemsYouNeedArray, setItemsYouNeedArray] = useState([]);
+
+  const addItemToArray = (name, qty, description, arrayToPush, price) => {
+    // push the item to the array of items
+    if (arrayToPush === "have") {
+      const item = {
+        name,
+        qty,
+        description,
+      };
+      setItemsYouHaveArray([...itemsYouHaveArray, item]);
+
+      setItemName("");
+      setItemQty("");
+      setItemDescription("");
+    }
+    if (arrayToPush === "need") {
+      const item = {
+        name,
+        qty,
+        description,
+        price,
+      };
+      setItemsYouNeedArray([...itemsYouNeedArray, item]);
+
+      setItemNeedName("");
+      setItemNeedQty("");
+      setItemNeedDescription("");
+      setItemNeedPrice("");
+    }
+  };
+
+  useEffect(() => {
+    console.log("Items You Have:", itemsYouHaveArray);
+    console.log("Items You Need :", itemsYouNeedArray);
+  }, [itemsYouHaveArray, itemsYouNeedArray]);
+
   const [showPageOne, setShowPageOne] = useState(true);
   const [showPageTwo, setShowPageTwo] = useState(false);
 
   const [showPageThree, setShowPageThree] = useState(false);
   const [showPageFour, setShowPageFour] = useState(false);
   const [showPageFive, setShowPageFive] = useState(false);
+
+  const generateTableRowJSX = (item, qty, description) => {
+    return (
+      <tr key={Math.floor(Math.random() * 100000)}>
+        <td>{item}</td>
+        <td>{qty}</td>
+        <td>{description}</td>
+      </tr>
+    );
+  };
+
+  const generateTableTwoRowJSX = (item, qty, description, price) => {
+    return (
+      <tr key={Math.floor(Math.random() * 100000)}>
+        <td>{item}</td>
+        <td>{qty}</td>
+        <td>{description}</td>
+        <td>{price}</td>
+      </tr>
+    );
+  };
 
   return (
     <div>
@@ -170,8 +240,132 @@ const CreateProjectForm = () => {
         {showPageThree ? (
           <>
             <h1>Equipment </h1>
-            <h4>Things you already have</h4>
-            <div className="table"></div>
+            <h4>Things You Already Have</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {itemsYouHaveArray?.map((item, index) =>
+                  generateTableRowJSX(item.name, item.qty, item.description)
+                )}
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="item"
+                      value={itemName}
+                      onChange={(e) => setItemName(e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="quantity"
+                      value={itemQty}
+                      onChange={(e) => setItemQty(e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="description"
+                      value={itemDescription}
+                      onChange={(e) => setItemDescription(e.target.value)}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button
+              className=""
+              type="button"
+              onClick={() => {
+                addItemToArray(itemName, itemQty, itemDescription, "have");
+              }}
+            >
+              Add Item
+            </button>
+
+            <h4>Things You Need </h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Quantity</th>
+                  <th>Description</th>
+                  <th>Est. Cost Per Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                {itemsYouNeedArray?.map((item, index) =>
+                  generateTableTwoRowJSX(
+                    item.name,
+                    item.qty,
+                    item.description,
+                    item.price
+                  )
+                )}
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="item"
+                      value={itemNeedName}
+                      onChange={(e) => setItemNeedName(e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="quantity"
+                      value={itemNeedQty}
+                      onChange={(e) => setItemNeedQty(e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="description"
+                      value={itemNeedDescription}
+                      onChange={(e) => setItemNeedDescription(e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="description"
+                      value={itemNeedPrice}
+                      onChange={(e) => setItemNeedPrice(e.target.value)}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button
+              className=""
+              type="button"
+              onClick={() => {
+                addItemToArray(
+                  itemNeedName,
+                  itemNeedQty,
+                  itemNeedDescription,
+                  "need",
+                  itemNeedPrice
+                );
+              }}
+            >
+              Add Item
+            </button>
+
+            <p>or </p>
+
+            <button type="button">None Required</button>
+
             <div className="btn-container">
               <p>Save as draft</p>
               <button

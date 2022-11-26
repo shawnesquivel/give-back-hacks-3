@@ -10,7 +10,7 @@ const CreateProject = () => {
       <h1>Create Project</h1>
 
       <div>
-        <h1>Select EIther</h1>
+        <h1>Select Either</h1>
         <button>Create New</button>
         <button>Use Past Projects</button>
       </div>
