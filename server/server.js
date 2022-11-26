@@ -140,4 +140,107 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+app.post("/api/createproject", async (req, res) => {
+  console.log("Inside the Create Project Endpoint");
+  console.log("req.body:", req.body);
+
+  const {
+    token,
+    userAssigned,
+    title,
+    description,
+    keywords,
+    time,
+    type,
+    size,
+    donationAmount,
+    donationReason,
+    itemsYouHaveArray,
+    itemsYouNeedArray,
+    volunteersYouHaveArray,
+    volunteersYouNeedArray,
+    issuesArray,
+  } = req.body;
+
+  console.log(
+    "Received Request:",
+    token,
+    userAssigned,
+    title,
+    description,
+    keywords,
+    time,
+    type,
+    size,
+    donationAmount,
+    donationReason,
+    itemsYouHaveArray,
+    itemsYouNeedArray,
+    volunteersYouHaveArray,
+    volunteersYouNeedArray,
+    issuesArray
+  );
+
+  let projectData;
+
+  try {
+    let influencerRecord = "";
+    influencerRecord._id = "";
+
+    const userRecord = await findUserByUsername(userAssigned);
+
+    if (!userRecord) {
+      console.log("no user found");
+    } else {
+      console.log("userRercord", userRecord);
+    }
+
+    // Create a project
+    const res = await Project.create({
+      organizerAssigned: userRecord._id,
+      title,
+      description,
+      keywords,
+      time,
+      type,
+      size,
+      donationAmount,
+      donationReason,
+      itemsYouHaveArray,
+      itemsYouNeedArray,
+      volunteersYouHaveArray,
+      volunteersYouNeedArray,
+      issuesArray,
+    });
+    console.log("Project was created:", res);
+
+    projectData = res;
+
+    await User.updateOne(
+      { _id: userRecord._id },
+      {
+        $push: { currentProjects: res._id },
+      }
+    );
+    console.log("Project added to user");
+  } catch (err) {
+    console.log(err);
+
+    throw err;
+  }
+  res.json({ status: "OK", project: projectData });
+});
+
 // port
+const findUser = async (_id) => {
+  return User.findOne({ _id });
+};
+const verifyJWT = (token) => {
+  // Verify the user, return the user + id
+  const user = jwt.verify(JSON.parse(token).token, JWT_SECRET_KEY);
+  const _id = user.id;
+  return [user, _id];
+};
+const findUserByUsername = async (username) => {
+  return User.findOne({ username });
+};

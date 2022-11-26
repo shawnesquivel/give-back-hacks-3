@@ -48,8 +48,12 @@ const CreateProjectForm = () => {
   const [itemNeedDescription, setItemNeedDescription] = useState("");
   const [itemNeedPrice, setItemNeedPrice] = useState("");
 
-  const [itemsYouHaveArray, setItemsYouHaveArray] = useState([]);
-  const [itemsYouNeedArray, setItemsYouNeedArray] = useState([]);
+  const [itemsYouHaveArray, setItemsYouHaveArray] = useState([
+    { name: "garbage bag", qty: 20, description: "to collect garbage" },
+  ]);
+  const [itemsYouNeedArray, setItemsYouNeedArray] = useState([
+    { name: "buckets", qty: 20, description: "to collect glass", price: 10 },
+  ]);
 
   const addItemToArray = (name, qty, description, arrayToPush, price) => {
     // push the item to the array of items
@@ -108,8 +112,22 @@ const CreateProjectForm = () => {
   };
 
   //   PAGE FOUR: VOLUNTEERS
-  const [volunteersYouHaveArray, setVolunteersYouHaveArray] = useState([]);
-  const [volunteersYouNeedArray, setVolunteersYouNeedArray] = useState([]);
+  const [volunteersYouHaveArray, setVolunteersYouHaveArray] = useState([
+    {
+      position: "General",
+      qty: 10,
+      certification: "None",
+      description: "Pick up trash",
+    },
+  ]);
+  const [volunteersYouNeedArray, setVolunteersYouNeedArray] = useState([
+    {
+      position: "Driver",
+      qty: 1,
+      certification: "License Class 5",
+      description: "To drive",
+    },
+  ]);
 
   const [volunteerPosition, setVolunteerPosition] = useState("");
   const [volunteerQty, setVolunteerQty] = useState("");
@@ -213,22 +231,41 @@ const CreateProjectForm = () => {
 
   const handleCreateProject = async (e) => {
     e.preventDefault();
-    const user = auth?.username;
     console.log(
       "Project Token:",
       auth.user,
       title,
       description,
-
-      keywords
+      keywords,
+      time,
+      type,
+      size,
+      donationAmount,
+      donationReason,
+      itemsYouHaveArray,
+      itemsYouNeedArray,
+      volunteersYouHaveArray,
+      volunteersYouNeedArray,
+      issuesArray
     );
 
     try {
       const payload = JSON.stringify({
         token: localStorage.getItem("token"),
-        brandRepAssigned: auth.user,
+        userAssigned: auth.user,
         title,
         description,
+        keywords,
+        time,
+        type,
+        size,
+        donationAmount,
+        donationReason,
+        itemsYouHaveArray,
+        itemsYouNeedArray,
+        volunteersYouHaveArray,
+        volunteersYouNeedArray,
+        issuesArray,
       });
 
       const response = await axios.post(CREATEPROJECT_URL, payload, {
@@ -330,6 +367,17 @@ const CreateProjectForm = () => {
               >
                 Next
               </button>
+              <button
+                className="btn-cta"
+                type="submit"
+                onClick={(e) => {
+                  setShowPageFive(false);
+                  setProjectSuccess(true);
+                  handleCreateProject(e);
+                }}
+              >
+                Create Project
+              </button>
             </div>
           </>
         ) : (
@@ -339,17 +387,23 @@ const CreateProjectForm = () => {
         {showPageTwo ? (
           <>
             <h1>Funding </h1>
-            <div className="btn-container">
+            <div className="btn-container" type="button">
               <button className="btn-cta">For Equipment or Labor</button>
               <p>Or</p>
-              <button className="btn-cta">None Required</button>
+              <button type="button" className="btn-cta">
+                None Required
+              </button>
               <p>Or</p>
-              <button className="btn-cta" onClick={() => showOther(true)}>
-                For Equipment or Labor
+              <button
+                className="btn-cta"
+                type="button"
+                onClick={() => showOther(true)}
+              >
+                Other
               </button>
             </div>
 
-            {showOther ? (
+            {other ? (
               <div className="create-project-col">
                 <div className="label-col-container">
                   <label htmlFor="donationAmount">Amount Needed</label>
@@ -740,9 +794,11 @@ const CreateProjectForm = () => {
               <p>Save as draft</p>
               <button
                 className="btn-cta"
-                onClick={() => {
+                type="submit"
+                onClick={(e) => {
                   setShowPageFive(false);
                   setProjectSuccess(true);
+                  handleCreateProject(e);
                 }}
               >
                 Create Project
@@ -757,6 +813,15 @@ const CreateProjectForm = () => {
       {projectSuccess ? (
         <>
           <h1>successfully created project!</h1>
+          {project ? (
+            <>
+              <h1>{project.title}</h1>
+              <h1>{project.description}</h1>
+              <h1>{project.userAssigned}</h1>
+            </>
+          ) : (
+            ""
+          )}
         </>
       ) : (
         ""
