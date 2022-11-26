@@ -37,8 +37,6 @@ const Login = () => {
 
       const accessToken = response?.data?.token;
 
-      setUser("");
-      setPwd("");
       console.log(response);
       // Reponse from server
       if (response.status === 200) {
@@ -67,6 +65,10 @@ const Login = () => {
           setErrMsg("Incorrect username or password. Please try again.");
         }
       }
+
+      setUser("");
+      setPwd("");
+
       // Axios Post Fails
     } catch (err) {
       if (err?.response) {

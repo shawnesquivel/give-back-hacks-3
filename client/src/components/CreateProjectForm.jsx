@@ -1,7 +1,19 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import axios from "../api/axios";
+import useAuth from "../hooks/useAuth";
+import AuthContext from "../context/AuthProvider";
+
+const CREATEPROJECT_URL = "/api/createproject";
 
 const CreateProjectForm = () => {
+  // User Information
+  const { auth } = useAuth(AuthContext);
+
+  useEffect(() => {
+    console.log(auth);
+  }, []);
+
   // PAGES
   const [showPageOne, setShowPageOne] = useState(true);
   const [showPageTwo, setShowPageTwo] = useState(false);
@@ -9,6 +21,7 @@ const CreateProjectForm = () => {
   const [showPageThree, setShowPageThree] = useState(false);
   const [showPageFour, setShowPageFour] = useState(false);
   const [showPageFive, setShowPageFive] = useState(false);
+  const [projectSuccess, setProjectSuccess] = useState(false);
 
   // PAGE ONE
   const [title, setTitle] = useState("Clothing Drive");
@@ -27,7 +40,6 @@ const CreateProjectForm = () => {
   );
 
   //   PAGE THREE
-
   const [itemName, setItemName] = useState("");
   const [itemQty, setItemQty] = useState("");
   const [itemDescription, setItemDescription] = useState("");
@@ -175,6 +187,64 @@ const CreateProjectForm = () => {
   //   PAGE 5: ADDITIONAL HELP WANTED
   const [showSpecificHelp, setShowSpecificHelp] = useState(false);
   const [issue, setIssue] = useState("");
+  const [issuesArray, setIssuesArray] = useState([]);
+  const addIssueToIssuesArray = () => {
+    // add to arary
+    setIssuesArray([
+      ...issuesArray,
+      {
+        issue,
+        status: "pending",
+        suggestion: "",
+      },
+    ]);
+
+    // reset
+    setIssue("");
+  };
+
+  useEffect(() => {
+    console.log("issues array", issuesArray);
+  }, [issuesArray]);
+
+  //   CREATE PROJECT
+
+  const [project, setProject] = useState("");
+
+  const handleCreateProject = async (e) => {
+    e.preventDefault();
+    const user = auth?.username;
+    console.log(
+      "Project Token:",
+      auth.user,
+      title,
+      description,
+
+      keywords
+    );
+
+    try {
+      const payload = JSON.stringify({
+        token: localStorage.getItem("token"),
+        brandRepAssigned: auth.user,
+        title,
+        description,
+      });
+
+      const response = await axios.post(CREATEPROJECT_URL, payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+
+      console.log("Response Data", response, response.data.project);
+      setProjectSuccess(true);
+      setProject(response.data.project);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -655,7 +725,11 @@ const CreateProjectForm = () => {
                   />
                 </div>
 
-                <button type="button" className="btn-cta">
+                <button
+                  type="button"
+                  className="btn-cta"
+                  onClick={addIssueToIssuesArray}
+                >
                   Add Issue
                 </button>
               </>
@@ -667,11 +741,11 @@ const CreateProjectForm = () => {
               <button
                 className="btn-cta"
                 onClick={() => {
-                  setShowPageFour(false);
-                  setShowPageFive(true);
+                  setShowPageFive(false);
+                  setProjectSuccess(true);
                 }}
               >
-                Next
+                Create Project
               </button>
             </div>
           </>
@@ -679,6 +753,14 @@ const CreateProjectForm = () => {
           ""
         )}
       </form>
+
+      {projectSuccess ? (
+        <>
+          <h1>successfully created project!</h1>
+        </>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
