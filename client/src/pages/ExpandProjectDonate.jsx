@@ -34,14 +34,14 @@ const ExpandProjectDonate = () => {
                 <h1>Would you like to</h1>
                 <div class="btn-options">
                   <button
-                    class="btn-double"
+                    class="btn-big"
                     onClick={() => setShowDonateMoney(true)}
                   >
-                    <h5>Donate Money</h5>
+                    <h5>Donate Money 💳</h5>
                   </button>
                   <h5>Or</h5>
-                  <button class="btn-double">
-                    <h5>Donate Item</h5>
+                  <button class="btn-big">
+                    <h5>Donate Item 🔨</h5>
                   </button>
                 </div>
               </div>
