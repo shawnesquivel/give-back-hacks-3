@@ -24,14 +24,6 @@ const CreateProject = () => {
           </div>
         </header>
         <div>
-          <div>
-            <h1>Select Either</h1>
-            <button>Create New</button>
-            <button>Use Past Projects</button>
-          </div>
-          <div>
-            <h1>Drafts</h1>
-          </div>
           <CreateProjectForm />
         </div>
       </main>

@@ -90,38 +90,42 @@ const Login = () => {
           Enter your account details
         </p>
         <form onSubmit={handleSubmit} className="login-form">
-          <label htmlFor="username" className="login-form__label">
-            Username
-          </label>
-          <input
-            onChange={(e) => {
-              setUser(e.target.value);
-            }}
-            type="text"
-            id="username"
-            autoComplete="off"
-            value={user}
-            required
-            placeholder="example@email.com"
-            className="login-form__input"
-          />
-          <label htmlFor="pwd" className="login-form__label mb-1">
-            Password
-          </label>
-          <input
-            type="password"
-            onChange={(e) => {
-              setPwd(e.target.value);
-            }}
-            value={pwd}
-            id="pwd"
-            required
-            placeholder="password"
-            className="login-form__input login-form__input--password"
-          />
-          <p id="uidnote" className="login-form__instructions">
-            Forgot Password?
-          </p>
+          <div className="label-col-container">
+            <label htmlFor="username" className="login-form__label">
+              Username (user@gmail.com)
+            </label>
+            <input
+              onChange={(e) => {
+                setUser(e.target.value);
+              }}
+              type="text"
+              id="username"
+              autoComplete="off"
+              value={user}
+              required
+              placeholder="example@email.com"
+              className="login-form__input"
+            />
+          </div>
+          <div className="label-col-container">
+            <label htmlFor="pwd" className="login-form__label mb-1">
+              Password
+            </label>
+            <input
+              type="password"
+              onChange={(e) => {
+                setPwd(e.target.value);
+              }}
+              value={pwd}
+              id="pwd"
+              required
+              placeholder="password"
+              className="login-form__input login-form__input--password"
+            />
+            <p id="uidnote" className="login-form__instructions">
+              Forgot Password?
+            </p>
+          </div>
 
           <div className="flex-col-center">
             {errMsg ? (

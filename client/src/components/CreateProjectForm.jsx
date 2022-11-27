@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "../api/axios";
+import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import AuthContext from "../context/AuthProvider";
+import copyPurple from "../assets/copy-purple.png";
+import plusPurple from "../assets/plus.png";
 
 const CREATEPROJECT_URL = "/api/createproject";
 
@@ -15,7 +18,8 @@ const CreateProjectForm = () => {
   }, []);
 
   // PAGES
-  const [showPageOne, setShowPageOne] = useState(true);
+  const [showSelect, setShowSelect] = useState(true);
+  const [showPageOne, setShowPageOne] = useState(false);
   const [showPageTwo, setShowPageTwo] = useState(false);
 
   const [showPageThree, setShowPageThree] = useState(false);
@@ -286,68 +290,115 @@ const CreateProjectForm = () => {
   return (
     <div>
       <form action="">
+        {showSelect ? (
+          <>
+            <h1 className="mb-2">Select Either</h1>
+            <div className="select-either">
+              <button
+                className="btn-big"
+                type="button"
+                onClick={() => {
+                  setShowSelect(false);
+                  setShowPageOne(true);
+                }}
+              >
+                <img src={plusPurple} alt="plus" className="btn-big-icon" />
+                Create New
+              </button>
+              <p>Or</p>
+              <button className="btn-big" type="button" disabled>
+                <img src={copyPurple} alt="plus" className="btn-big-icon" />
+                Start From Previous Project
+              </button>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+
         {showPageOne ? (
           <>
-            <h1>Details</h1>
-
+            <h1 className="mb-2p5">Project Details</h1>
             <div className="create-project-row">
               <div className="create-project-col">
                 <div className="label-col-container">
-                  <label htmlFor="title">Project Name</label>
+                  <label className="create-project__label" htmlFor="title">
+                    Project Name
+                  </label>
                   <input
+                    className="create-project__input"
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                   />
                 </div>
                 <div className="label-col-container">
-                  <label htmlFor="date">Date</label>
+                  <label className="create-project__label" htmlFor="date">
+                    Date
+                  </label>
                   <input
+                    className="create-project__input"
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                   />
                 </div>
                 <div className="label-col-container">
-                  <label htmlFor="description">Project Description</label>
-                  <textarea
-                    type="textarea"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                  <label className="create-project__label" htmlFor="time">
+                    Time
+                  </label>
+                  <input
+                    className="create-project__input"
+                    type="text"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
                   />
                 </div>
               </div>
 
               <div className="label-col-container">
                 <div className="label-col-container">
-                  <label htmlFor="time">Time</label>
+                  <label className="create-project__label" htmlFor="type">
+                    Project Type
+                  </label>
                   <input
-                    type="text"
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                  />
-                </div>
-                <div className="label-col-container">
-                  <label htmlFor="type">Project Type</label>
-                  <input
+                    className="create-project__input"
                     type="text"
                     value={type}
                     onChange={(e) => setType(e.target.value)}
                   />
                 </div>
                 <div className="label-col-container">
-                  <label htmlFor="size">Project Size (# of ppl in total)</label>
+                  <label
+                    className="create-project__label"
+                    htmlFor="description"
+                  >
+                    Project Description
+                  </label>
+                  <textarea
+                    type="textarea"
+                    className="create-project__input"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  />
+                </div>
+                <div className="label-col-container">
+                  <label className="create-project__label" htmlFor="size">
+                    Project Size (# of ppl in total)
+                  </label>
                   <input
+                    className="create-project__input"
                     type="text"
                     value={size}
                     onChange={(e) => setSize(e.target.value)}
                   />
                 </div>
                 <div className="label-col-container">
-                  <label htmlFor="keywords">
-                    Keywords (add a comma , between each
+                  <label className="create-project__label" htmlFor="keywords">
+                    Keywords (add a comma between each)
                   </label>
                   <input
+                    className="create-project__input"
                     type="text"
                     value={keywords}
                     onChange={(e) => setKeywords(e.target.value)}
@@ -356,10 +407,9 @@ const CreateProjectForm = () => {
               </div>
             </div>
 
-            <div className="btn-container">
-              <p>Save as draft</p>
+            <div className="btn-container btn-container--left">
               <button
-                className="btn-cta"
+                className="btn-purple btn-purple--medium"
                 onClick={() => {
                   setShowPageOne(false);
                   setShowPageTwo(true);
@@ -367,6 +417,7 @@ const CreateProjectForm = () => {
               >
                 Next
               </button>
+              <p className="muted">Save as draft</p>
               <button
                 className="btn-cta"
                 type="submit"
@@ -386,19 +437,25 @@ const CreateProjectForm = () => {
 
         {showPageTwo ? (
           <>
-            <h1>Funding </h1>
-            <div className="btn-container" type="button">
-              <button className="btn-cta">For Equipment or Labor</button>
+            <h1 className="mb-1">Funding </h1>
+            <h5 className="mb-2p5">Select reason for needing funding:</h5>
+            <div className="btn-container mb-2" type="button">
+              <button className="btn-big" type="button" disabled>
+                <img src={plusPurple} alt="plus" className="btn-big-icon" />
+                Equipment
+              </button>
               <p>Or</p>
-              <button type="button" className="btn-cta">
+              <button type="button" className="btn-big" disabled>
+                <img src={plusPurple} alt="plus" className="btn-big-icon" />
                 None Required
               </button>
               <p>Or</p>
               <button
-                className="btn-cta"
+                className="btn-big"
                 type="button"
                 onClick={() => showOther(true)}
               >
+                <img src={plusPurple} alt="plus" className="btn-big-icon" />
                 Other
               </button>
             </div>
@@ -406,16 +463,29 @@ const CreateProjectForm = () => {
             {other ? (
               <div className="create-project-col">
                 <div className="label-col-container">
-                  <label htmlFor="donationAmount">Amount Needed</label>
+                  <label
+                    className="create-project__label"
+                    htmlFor="donationAmount"
+                  >
+                    Amount Needed
+                  </label>
                   <input
+                    className="create-project__input"
+                    placeholder="$"
                     type="text"
                     value={donationAmount}
                     onChange={(e) => setDonationAmount(e.target.value)}
                   />
                 </div>
                 <div className="label-col-container">
-                  <label htmlFor="donationReason">Amount Needed</label>
+                  <label
+                    className="create-project__label"
+                    htmlFor="donationReason"
+                  >
+                    Describe reason
+                  </label>
                   <input
+                    className="create-project__input"
                     type="text"
                     value={donationReason}
                     onChange={(e) => setDonationReason(e.target.value)}
@@ -426,10 +496,9 @@ const CreateProjectForm = () => {
               ""
             )}
 
-            <div className="btn-container">
-              <p>Save as draft</p>
+            <div className="btn-container btn-container--left">
               <button
-                className="btn-cta"
+                className="btn-purple btn-purple--medium"
                 onClick={() => {
                   setShowPageTwo(false);
                   setShowPageThree(true);
@@ -437,6 +506,7 @@ const CreateProjectForm = () => {
               >
                 Next
               </button>
+              <h5 className="muted">Save as draft</h5>
             </div>
           </>
         ) : (
@@ -445,9 +515,13 @@ const CreateProjectForm = () => {
 
         {showPageThree ? (
           <>
-            <h1>Equipment </h1>
-            <h4>Things You Already Have</h4>
-            <table>
+            <h1 className="mb-1">Equipment </h1>
+            <h5 className="mb-2p5">
+              This section includes any tools, equipment, food, etc. that you
+              will need for your event.
+            </h5>
+            <h6 className="c-black mb-1">Things You Already Have</h6>
+            <table className="table-white">
               <thead>
                 <tr>
                   <th>Item</th>
@@ -488,17 +562,18 @@ const CreateProjectForm = () => {
               </tbody>
             </table>
             <button
-              className=""
+              className="btn-add-item mb-2"
               type="button"
               onClick={() => {
                 addItemToArray(itemName, itemQty, itemDescription, "have");
               }}
             >
-              Add Item
+              Add Item{" "}
+              <span style={{ fontWeight: "500", fontSize: "1.1rem" }}> +</span>
             </button>
 
-            <h4>Things You Need </h4>
-            <table>
+            <h6 className="c-black mb-1">Things You Need </h6>
+            <table className="table-white">
               <thead>
                 <tr>
                   <th>Item</th>
@@ -553,7 +628,7 @@ const CreateProjectForm = () => {
               </tbody>
             </table>
             <button
-              className=""
+              className="btn-add-item mb-2"
               type="button"
               onClick={() => {
                 addItemToArray(
@@ -565,17 +640,19 @@ const CreateProjectForm = () => {
                 );
               }}
             >
-              Add Item
+              Add Item{" "}
+              <span style={{ fontWeight: "500", fontSize: "1.1rem" }}> +</span>
             </button>
 
-            <p>or </p>
+            <p>Or</p>
 
-            <button type="button">None Required</button>
+            <button type="button" className="btn-none-req mb-2" disabled>
+              None Required
+            </button>
 
-            <div className="btn-container">
-              <p>Save as draft</p>
+            <div className="btn-container btn-container--left">
               <button
-                className="btn-cta"
+                className="btn-purple btn-purple--medium"
                 onClick={() => {
                   setShowPageThree(false);
                   setShowPageFour(true);
@@ -583,6 +660,7 @@ const CreateProjectForm = () => {
               >
                 Next
               </button>
+              <p className="muted">Save as draft</p>
             </div>
           </>
         ) : (
@@ -591,13 +669,17 @@ const CreateProjectForm = () => {
 
         {showPageFour ? (
           <>
-            <h1>Volunteers</h1>
-            <h4>Volunteers You Already Have</h4>
-            <table>
+            <h1 className="mb-1">Volunteers</h1>
+            <h5 className="mb-2p5">
+              This section includes any general and special volunteers you need
+              before, after or during the event.
+            </h5>
+            <h6 className="c-black mb-1">Volunteers You Already Have</h6>
+            <table className="table-white">
               <thead>
                 <tr>
                   <th>Position</th>
-                  <th>#</th>
+                  <th># of People</th>
                   <th>Certification</th>
                   <th>Description</th>
                 </tr>
@@ -650,7 +732,7 @@ const CreateProjectForm = () => {
               </tbody>
             </table>
             <button
-              className=""
+              className="btn-add-item mb-2"
               type="button"
               onClick={() => {
                 addToVolunteersYouHaveArray(
@@ -661,15 +743,16 @@ const CreateProjectForm = () => {
                 );
               }}
             >
-              Add Volunteer
+              Add Volunteer{" "}
+              <span style={{ fontWeight: "500", fontSize: "1.1rem" }}> +</span>
             </button>
 
-            <h4>Volunteers You Already Have</h4>
-            <table>
+            <h6 className="c-black mb-1">Volunteers You Need</h6>
+            <table className="table-white">
               <thead>
                 <tr>
                   <th>Position</th>
-                  <th>#</th>
+                  <th># of People</th>
                   <th>Certification</th>
                   <th>Description</th>
                 </tr>
@@ -724,7 +807,7 @@ const CreateProjectForm = () => {
               </tbody>
             </table>
             <button
-              className=""
+              className="btn-add-item mb-2"
               type="button"
               onClick={() => {
                 addToVolunteersYouNeedArray(
@@ -735,13 +818,13 @@ const CreateProjectForm = () => {
                 );
               }}
             >
-              Add Volunteer
+              Add Volunteer{" "}
+              <span style={{ fontWeight: "500", fontSize: "1.1rem" }}> +</span>
             </button>
 
-            <div className="btn-container">
-              <p>Save as draft</p>
+            <div className="btn-container btn-container--left">
               <button
-                className="btn-cta"
+                className="btn-purple btn-purple--medium"
                 onClick={() => {
                   setShowPageFour(false);
                   setShowPageFive(true);
@@ -749,6 +832,7 @@ const CreateProjectForm = () => {
               >
                 Next
               </button>
+              <p className="muted">Save as draft</p>
             </div>
           </>
         ) : (
@@ -757,22 +841,36 @@ const CreateProjectForm = () => {
 
         {showPageFive ? (
           <>
-            <h1>Help Wanted</h1>
-            <h4>Select all the apply</h4>
+            <h1 className="mb-1">Help Wanted</h1>
+            <h5 className="mb-2p5">
+              Do you have any event-related issue that you don’t know how to
+              solve on your own? The Humankynd community can help!
+            </h5>
 
-            <div className="btn-container">
-              <button type="button" onClick={() => setShowSpecificHelp(true)}>
+            <div className="btn-container btn-container--left mb-2">
+              <button
+                className="btn-big"
+                type="button"
+                onClick={() => setShowSpecificHelp(true)}
+              >
+                <img src={plusPurple} alt="plus" className="btn-big-icon" />
                 Specific Help
               </button>
-              <p>or</p>
-              <button>None Required</button>
+              <p>Or</p>
+              <button className="btn-big">
+                <img src={copyPurple} alt="copy" className="btn-big-icon" />
+                None Required
+              </button>
             </div>
 
             {showSpecificHelp ? (
               <>
                 <div className="label-col-container">
-                  <label htmlFor="issue">Issue Name</label>
+                  <label className="create-project__label" htmlFor="issue">
+                    Issue Name
+                  </label>
                   <input
+                    className="create-project__input"
                     type="issue"
                     onChange={(e) => setIssue(e.target.value)}
                     value={issue}
@@ -781,19 +879,22 @@ const CreateProjectForm = () => {
 
                 <button
                   type="button"
-                  className="btn-cta"
+                  className="btn-add-item mb-2"
                   onClick={addIssueToIssuesArray}
                 >
-                  Add Issue
+                  Add Issue{" "}
+                  <span style={{ fontWeight: "500", fontSize: "1.1rem" }}>
+                    {" "}
+                    +
+                  </span>
                 </button>
               </>
             ) : (
               " "
             )}
-            <div className="btn-container">
-              <p>Save as draft</p>
+            <div className="btn-container btn-container--left">
               <button
-                className="btn-cta"
+                className="btn-purple btn-purple--medium btn-purple--create"
                 type="submit"
                 onClick={(e) => {
                   setShowPageFive(false);
@@ -803,6 +904,7 @@ const CreateProjectForm = () => {
               >
                 Create Project
               </button>
+              <p className="muted">Save as draft</p>
             </div>
           </>
         ) : (
@@ -812,16 +914,8 @@ const CreateProjectForm = () => {
 
       {projectSuccess ? (
         <>
-          <h1>successfully created project!</h1>
-          {project ? (
-            <>
-              <h1>{project.title}</h1>
-              <h1>{project.description}</h1>
-              <h1>{project.userAssigned}</h1>
-            </>
-          ) : (
-            ""
-          )}
+          <h4>Your project, {project.title} was created!</h4>
+          <p>Go to your dashboard to view the project.</p>
         </>
       ) : (
         ""

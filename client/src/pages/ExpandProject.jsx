@@ -16,6 +16,10 @@ const ExpandProject = ({}) => {
     getUserData();
   }, []);
 
+  const [showSuggest, setShowSuggest] = useState(false);
+  const [solution, setSolution] = useState("");
+  const [solutionSuccess, setSolutionSuccess] = useState(false);
+
   const getUserData = async () => {
     const user = auth?.user;
     const payload = JSON.stringify({
@@ -117,9 +121,15 @@ const ExpandProject = ({}) => {
                   <th className="border">Description</th>
                 </thead>
                 <tbody>
-                  <td className="border">Project item</td>
-                  <td className="border">Project Qty</td>
-                  <td className="border">Project Desc</td>
+                  {itemsYouHaveArray?.map((item) => {
+                    return (
+                      <>
+                        <td className="border">{item.name}</td>
+                        <td className="border">{item.qty}</td>
+                        <td className="border">{item.description}</td>
+                      </>
+                    );
+                  })}
                 </tbody>
               </table>
               <h6 className="c-black">Things they have</h6>
@@ -130,17 +140,69 @@ const ExpandProject = ({}) => {
                   <th className="border">Description</th>
                 </thead>
                 <tbody>
-                  <td className="border">Project item</td>
-                  <td className="border">Project Qty</td>
-                  <td className="border">Project Desc</td>
+                  {itemsYouNeedArray?.map((item) => {
+                    return (
+                      <>
+                        <td className="border">{item.name}</td>
+                        <td className="border">{item.qty}</td>
+                        <td className="border">{item.description}</td>
+                      </>
+                    );
+                  })}
                 </tbody>
               </table>
 
-              <button className="btn-purple">Donate Equipment or Money</button>
+              <button className="btn-purple">Donate Equipment</button>
             </div>
 
             {/* Volunteers */}
+            <h4>Volunteers</h4>
+            <div className="expand-project-card expand-project-card--col">
+              <h6 className="c-black">Volunteers They Need</h6>
+              <table className="t-borders">
+                <thead>
+                  <th className="border">Position</th>
+                  <th className="border"># of People</th>
+                  <th className="border">Certification</th>
+                  <th className="border">Description</th>
+                </thead>
+                <tbody>
+                  {volunteersYouHaveArray?.map((item) => {
+                    return (
+                      <>
+                        <td className="border">{item.position}</td>
+                        <td className="border">{item.qty}</td>
+                        <td className="border">{item.certification}</td>
+                        <td className="border">{item.description}</td>
+                      </>
+                    );
+                  })}
+                </tbody>
+              </table>
+              <h6 className="c-black">Volunteers They Have</h6>
+              <table className="t-borders">
+                <thead>
+                  <th className="border">Position</th>
+                  <th className="border"># of People</th>
+                  <th className="border">Certification</th>
+                  <th className="border">Description</th>
+                </thead>
+                <tbody>
+                  {volunteersYouNeedArray?.map((item) => {
+                    return (
+                      <>
+                        <td className="border">{item.position}</td>
+                        <td className="border">{item.qty}</td>
+                        <td className="border">{item.certification}</td>
+                        <td className="border">{item.description}</td>
+                      </>
+                    );
+                  })}
+                </tbody>
+              </table>
 
+              <button className="btn-purple">Volunteer</button>
+            </div>
             {/* Updates */}
 
             <h4>Updates</h4>
@@ -196,7 +258,47 @@ const ExpandProject = ({}) => {
                 what to do like how do I even solve this help me pls idk the
                 internet isn’t helping
               </p>
-              <button className="btn-purple">Suggest A Solution</button>
+              {!showSuggest ? (
+                <button
+                  className="btn-purple"
+                  type="button"
+                  onClick={() => {
+                    setShowSuggest(true);
+                  }}
+                >
+                  Suggest A Solution
+                </button>
+              ) : (
+                <>
+                  <div className="label-col-container">
+                    <label htmlFor="solution"></label>
+                    <input
+                      type="text"
+                      value={solution}
+                      className="mb-1"
+                      onChange={(e) => setSolution(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      className="btn-purple"
+                      onClick={() => {
+                        setSolutionSuccess(true);
+                        setSolution("");
+                      }}
+                    >
+                      Suggest Solution
+                    </button>
+                  </div>
+                </>
+              )}
+              {solutionSuccess ? <p>Your suggestion was recommended!</p> : ""}
+            </div>
+
+            <h4>Funding</h4>
+            <div className="expand-project-card expand-project-card--col expand-project-card--sm">
+              <h6 className="c-black">$0 RAISED of ${donationAmount}</h6>
+              <p> To be used for: {donationReason}</p>
+              <button className="btn-purple">Donate Equipment</button>
             </div>
           </div>
         </div>
