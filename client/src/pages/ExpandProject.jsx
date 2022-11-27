@@ -6,9 +6,11 @@ import NavbarColumn from "../components/NavbarColumn";
 import avatar from "../assets/avatar.png";
 import useAuth from "../hooks/useAuth";
 import AuthContext from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
+const moment = require("moment");
 const GETUSER_URL = "/api/getuser";
-
 const ExpandProject = ({}) => {
+  const navigate = useNavigate();
   const { auth } = useAuth(AuthContext);
   const [userData, setUserData] = useState("");
   // get user data
@@ -50,6 +52,7 @@ const ExpandProject = ({}) => {
     description,
     keywords,
     time,
+    date,
     type,
     size,
     donationAmount,
@@ -93,7 +96,11 @@ const ExpandProject = ({}) => {
                 </tr>
                 <tr>
                   <th>Date</th>
-                  <td>2022-12-25</td>
+                  <td>{moment(date).format("MMMM Do YYYY")}</td>
+                </tr>
+                <tr>
+                  <th>Time</th>
+                  <td>{time}</td>
                 </tr>
                 <tr>
                   <th>Size</th>
@@ -152,7 +159,15 @@ const ExpandProject = ({}) => {
                 </tbody>
               </table>
 
-              <button className="btn-purple">Donate Equipment</button>
+              <button type="button" className="btn-purple">
+                <Link
+                  to="/expandproject/donate"
+                  state={{ data: project }}
+                  className="link"
+                >
+                  Donate Equipment
+                </Link>
+              </button>
             </div>
 
             {/* Volunteers */}
@@ -201,7 +216,15 @@ const ExpandProject = ({}) => {
                 </tbody>
               </table>
 
-              <button className="btn-purple">Volunteer</button>
+              <button type="button" className="btn-purple">
+                <Link
+                  to="/expandproject/volunteer"
+                  state={{ data: project }}
+                  className="link"
+                >
+                  Sign Up As A Volunteer
+                </Link>
+              </button>
             </div>
             {/* Updates */}
 
@@ -253,11 +276,18 @@ const ExpandProject = ({}) => {
                 <img src={avatar} className="avatar-sm" alt="avatar" />
                 <h5 className="">Rick Smith</h5>
               </div>
-              <p>
-                I’m having problems with this specific issue and I don’t know
-                what to do like how do I even solve this help me pls idk the
-                internet isn’t helping
-              </p>
+              {issuesArray[0] ? (
+                issuesArray.map((issue) => {
+                  return <p>{issue}</p>;
+                })
+              ) : (
+                <p>
+                  I’m having problems with this specific issue and I don’t know
+                  what to do like how do I even solve this help me pls idk the
+                  internet isn’t helping
+                </p>
+              )}
+
               {!showSuggest ? (
                 <button
                   className="btn-purple"
@@ -298,7 +328,7 @@ const ExpandProject = ({}) => {
             <div className="expand-project-card expand-project-card--col expand-project-card--sm">
               <h6 className="c-black">$0 RAISED of ${donationAmount}</h6>
               <p> To be used for: {donationReason}</p>
-              <button className="btn-purple">Donate Equipment</button>
+              <button className="btn-purple">Donate Money</button>
             </div>
           </div>
         </div>

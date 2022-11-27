@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import "../index.scss";
 import axios from "../api/axios";
 import landingImg from "../assets/createprofile-start.png";
+import happyFaces from "../assets/happyfaces.png";
+import logo from "../assets/humankynd-logo.png";
+import backArrow from "../assets/back-arrow.png";
+import { useNavigate } from "react-router-dom";
+
 const REGISTER_URL = "/api/register";
 
 const CreateProfile = () => {
+  const navigate = useNavigate(); // to use the navigate hook
+
   const [showWelcome, setShowWelcome] = useState(true);
   const [name, setName] = useState("Shawn");
   const [showName, setShowName] = useState(false);
@@ -24,16 +31,12 @@ const CreateProfile = () => {
   const [certificationExpiry, setCertificationExpiry] = useState("2023-11-26");
 
   // const [certifcationFile, setCertificationFile] = useState("");
-  const [showCertificationFile, setShowCertificationFile] = useState(false);
   const [address, setAddress] = useState("123 Washington St");
   const [showAddress, setShowAddress] = useState(false);
   const [dob, setDob] = useState("1990-11-27");
   // const [showDob, setShowDob] = useState(false);
   // const [license, setLicense] = useState("");
-  const [showLicense, setShowLicense] = useState(false);
 
-  const [uploadedCert, setUploadedCert] = useState(false);
-  const [uploadedLicense, setUploadedLicense] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const handleKeyDown = async (e) => {
@@ -104,6 +107,11 @@ const CreateProfile = () => {
 
   return (
     <section className="create-profile">
+      <img
+        src={logo}
+        alt="humankynd logo"
+        className="logo logo--createprofile"
+      />
       {showWelcome ? (
         <>
           <div class="create-profile-row">
@@ -114,18 +122,20 @@ const CreateProfile = () => {
                 </h1>
                 <h3>
                   Create a profile and find ways to be kind in your community.
-                  <span className="bold">Ready to make a difference?</span>
+                  <span className="bold"> Ready to make a difference?</span>
                 </h3>
               </div>
-              <button
-                className="btn-cta"
-                onClick={() => {
-                  setShowWelcome(false);
-                  setShowName(true);
-                }}
-              >
-                I'm Ready
-              </button>
+              <div className="btn-container btn-container--left">
+                <button
+                  className="btn-cta"
+                  onClick={() => {
+                    setShowWelcome(false);
+                    setShowName(true);
+                  }}
+                >
+                  I'm Ready
+                </button>
+              </div>
             </div>
             <div class="create-profile-col__right">
               <img
@@ -148,26 +158,60 @@ const CreateProfile = () => {
       >
         {showName ? (
           <>
-            <label htmlFor="name" className="create-profile__label">
-              What's your name?
-            </label>
-            <br />
-            <input
-              type="text"
-              className="create-profile__input"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
-            <div className="flex-row-center">
-              <button
-                className="btn-cta"
-                onClick={() => {
-                  setShowName(false);
-                  setShowPwd(true);
-                }}
-              >
-                Next
-              </button>
+            <div class="create-profile-row">
+              <div class="create-profile-col__left">
+                <div class="page-label">
+                  <h6 className="c-black">Create A Profile</h6>
+                  <h1>What is your name?</h1>
+                </div>
+                <div class="input-fields">
+                  <div>
+                    <label htmlFor="name" class="create-profile__label">
+                      Full Name
+                    </label>
+                    <br />
+                    <input
+                      type="text"
+                      className="create-profile__input"
+                      onChange={(e) => setName(e.target.value)}
+                      value={name}
+                    />
+                  </div>
+                </div>
+                <div className="btn-container btn-container--left">
+                  <button
+                    className="btn-back"
+                    type="button"
+                    onClick={() => {
+                      setShowName(false);
+                      setShowWelcome(true);
+                    }}
+                  >
+                    <img
+                      src={backArrow}
+                      alt="back arrow"
+                      class="btn-back-img"
+                    />
+                  </button>
+                  <button
+                    className="btn-cta"
+                    type="button"
+                    onClick={() => {
+                      setShowName(false);
+                      setShowPwd(true);
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+              <div class="create-profile-col__right">
+                <img
+                  class="image"
+                  src={happyFaces}
+                  alt="pastel circles on green background and a happy face"
+                />
+              </div>
             </div>
           </>
         ) : (
@@ -175,26 +219,59 @@ const CreateProfile = () => {
         )}
         {showPwd ? (
           <>
-            <label htmlFor="pwd" className="create-profile__label">
-              Enter a password
-            </label>
-            <br />
-            <input
-              type="password"
-              className="create-profile__input"
-              onChange={(e) => setPwd(e.target.value)}
-              value={pwd}
-            />
-            <div className="flex-row-center">
-              <button
-                className="btn-cta"
-                onClick={() => {
-                  setShowPwd(false);
-                  setShowEmail(true);
-                }}
-              >
-                Next
-              </button>
+            <div class="create-profile-row">
+              <div class="create-profile-col__left">
+                <div class="page-label">
+                  <h6 className="c-black">Create A Profile</h6>
+                  <h1>Enter a password</h1>
+                </div>
+                <div class="input-fields">
+                  <div>
+                    <label htmlFor="pwd" className="create-profile__label">
+                      Enter a password
+                    </label>
+                    <input
+                      type="password"
+                      className="create-profile__input"
+                      onChange={(e) => setPwd(e.target.value)}
+                      value={pwd}
+                    />
+                  </div>
+                </div>
+                <div className="btn-container btn-container--left">
+                  <button
+                    className="btn-back"
+                    type="button"
+                    onClick={() => {
+                      setShowPwd(false);
+                      setShowName(true);
+                    }}
+                  >
+                    <img
+                      src={backArrow}
+                      alt="back arrow"
+                      class="btn-back-img"
+                    />
+                  </button>
+                  <button
+                    className="btn-cta"
+                    type="button"
+                    onClick={() => {
+                      setShowPwd(false);
+                      setShowEmail(true);
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+              <div class="create-profile-col__right">
+                <img
+                  class="image"
+                  src={happyFaces}
+                  alt="pastel circles on green background and a happy face"
+                />
+              </div>
             </div>
           </>
         ) : (
@@ -202,26 +279,59 @@ const CreateProfile = () => {
         )}
         {showEmail ? (
           <>
-            <label htmlFor="email" className="create-profile__label">
-              Please enter your email:
-            </label>
-            <br />
-            <input
-              type="text"
-              value={email}
-              className="create-profile__input"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <div className="flex-row-center">
-              <button
-                className="btn-cta"
-                onClick={() => {
-                  setShowEmail(false);
-                  setShowInterests(true);
-                }}
-              >
-                Next
-              </button>
+            <div class="create-profile-row">
+              <div class="create-profile-col__left">
+                <div class="page-label">
+                  <h6 className="c-black">Create Login</h6>
+                  <h1>What is your email?</h1>
+                </div>
+                <div class="input-fields">
+                  <div>
+                    <label htmlFor="email" className="create-profile__label">
+                      Please enter your email:
+                    </label>
+                    <input
+                      type="text"
+                      value={email}
+                      className="create-profile__input"
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="btn-container btn-container--left">
+                  <button
+                    className="btn-back"
+                    type="button"
+                    onClick={() => {
+                      setShowPwd(false);
+                      setShowName(true);
+                    }}
+                  >
+                    <img
+                      src={backArrow}
+                      alt="back arrow"
+                      class="btn-back-img"
+                    />
+                  </button>
+                  <button
+                    className="btn-cta"
+                    type="button"
+                    onClick={() => {
+                      setShowEmail(false);
+                      setShowInterests(true);
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+              <div class="create-profile-col__right">
+                <img
+                  class="image"
+                  src={happyFaces}
+                  alt="pastel circles on green background and a happy face"
+                />
+              </div>
             </div>
           </>
         ) : (
@@ -229,28 +339,160 @@ const CreateProfile = () => {
         )}
         {showInterests ? (
           <>
-            <label htmlFor="interests" className="create-profile__label">
-              What are your interests? (Press ENTER)
-            </label>
-            <input
-              id="interests"
-              type="text"
-              className="interests-input"
-              onKeyDown={handleKeyDown}
-            />
-            <div className="words-container">
-              {interests?.map((word, index) => (
-                <div className="words-item" key={index}>
-                  <span className="words-text">{word}</span>
-                  <span
-                    onClick={(e) => removeKeyword(e, index)}
-                    className="interests-delete"
-                  >
-                    &times;
-                  </span>
+            <div class="create-profile-row">
+              <div class="create-profile-col__left">
+                <div class="page-label">
+                  <h6 className="c-black">Create A Profile</h6>
+                  <h1>What are your interests?</h1>
                 </div>
-              ))}
+                <div class="input-fields">
+                  <div>
+                    <label htmlFor="email" className="create-profile__label">
+                      Type interests & press Enter
+                    </label>
+                    <input
+                      id="interests"
+                      type="text"
+                      className="interests-input"
+                      onKeyDown={handleKeyDown}
+                    />
+                    <div className="words-container">
+                      {interests?.map((word, index) => (
+                        <div className="words-item" key={index}>
+                          <span className="words-text">{word}</span>
+                          <span
+                            onClick={(e) => removeKeyword(e, index)}
+                            className="interests-delete"
+                          >
+                            &times;
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="btn-container btn-container--left">
+                  <button
+                    className="btn-back"
+                    type="button"
+                    onClick={() => {
+                      setShowInterests(false);
+                      setShowEmail(true);
+                    }}
+                  >
+                    <img
+                      src={backArrow}
+                      alt="back arrow"
+                      class="btn-back-img"
+                    />
+                  </button>
+                  <button
+                    className="btn-cta"
+                    type="button"
+                    onClick={() => {
+                      setShowInterests(false);
+                      setShowSkills(true);
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+              <div class="create-profile-col__right">
+                <img
+                  class="image"
+                  src={happyFaces}
+                  alt="pastel circles on green background and a happy face"
+                />
+              </div>
             </div>
+
+            {/* not sure why "ENTER" only works when there is stuff between the button and the input */}
+            <div className="offscreen">
+              <label htmlFor="tags" className="form__label">
+                Required Profile Tags (Press Enter ⏎)
+              </label>
+              <input
+                type="text"
+                className="tags-input"
+                placeholder="Add a tag"
+              />
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+
+        {showSkills ? (
+          <>
+            <div class="create-profile-row">
+              <div class="create-profile-col__left">
+                <div class="page-label">
+                  <h6 className="c-black">Create A Profile</h6>
+                  <h1>What are your skills?</h1>
+                </div>
+                <div class="input-fields">
+                  <div>
+                    <label htmlFor="email" className="create-profile__label">
+                      What are your skills? (Press ENTER)
+                    </label>
+                    <input
+                      id="skills"
+                      type="text"
+                      className="skills-input"
+                      onKeyDown={handleKeyDown}
+                    />
+                    <div className="words-container">
+                      {skills?.map((word, index) => (
+                        <div className="words-item" key={index}>
+                          <span className="words-text">{word}</span>
+                          <span
+                            onClick={(e) => removeKeyword(e, index)}
+                            className="skills-delete"
+                          >
+                            &times;
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="btn-container btn-container--left">
+                  <button
+                    className="btn-back"
+                    type="button"
+                    onClick={() => {
+                      setShowSkills(false);
+                      setShowInterests(true);
+                    }}
+                  >
+                    <img
+                      src={backArrow}
+                      alt="back arrow"
+                      class="btn-back-img"
+                    />
+                  </button>
+                  <button
+                    className="btn-cta"
+                    type="button"
+                    onClick={() => {
+                      setShowSkills(false);
+                      setShowCertifications(true);
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+              <div class="create-profile-col__right">
+                <img
+                  class="image"
+                  src={happyFaces}
+                  alt="pastel circles on green background and a happy face"
+                />
+              </div>
+            </div>
+
             {/* not sure why "ENTER" only works when there is stuff between the button and the input */}
             <div className="offscreen">
               <label htmlFor="tags" className="form__label">
@@ -263,26 +505,8 @@ const CreateProfile = () => {
               />
             </div>
 
-            <div className="flex-row-center">
-              <button
-                className="btn-cta"
-                type="button"
-                onClick={() => {
-                  setShowInterests(false);
-                  setShowSkills(true);
-                }}
-              >
-                Next
-              </button>
-            </div>
-          </>
-        ) : (
-          ""
-        )}
-
-        {showSkills ? (
-          <>
-            <label htmlFor="skills" className="create-profile__label">
+            {/* old */}
+            {/* <label htmlFor="skills" className="create-profile__label">
               What are your skills? (Press ENTER)
             </label>
             <input
@@ -303,9 +527,9 @@ const CreateProfile = () => {
                   </span>
                 </div>
               ))}
-            </div>
+            </div> */}
             {/* not sure why "ENTER" only works when there is stuff between the button and the input */}
-            <div className="offscreen">
+            {/* <div className="offscreen">
               <label htmlFor="tags" className="form__label">
                 Required Profile Tags (Press Enter ⏎)
               </label>
@@ -327,7 +551,7 @@ const CreateProfile = () => {
               >
                 Next
               </button>
-            </div>
+            </div> */}
           </>
         ) : (
           ""
@@ -335,78 +559,68 @@ const CreateProfile = () => {
 
         {showCertifications ? (
           <>
-            <h1>Do you have any certifications?</h1>
-            <label htmlFor="certType" className="create-profile__label">
-              Type
-            </label>
-            <input
-              type="text"
-              className="create-profile__input"
-              onChange={(e) => setCertificationType(e.target.value)}
-              value={certificationType}
-            />
+            <div class="create-profile-row">
+              <div class="create-profile-col__left">
+                <div class="page-label">
+                  <h6>Create A Profile</h6>
+                  <h1>Do you have any certifications?</h1>
+                </div>
+                <div class="input-fields">
+                  <label htmlFor="certType" class="create-profile__label">
+                    Type
+                  </label>
+                  <input
+                    type="text"
+                    className="create-profile__input"
+                    onChange={(e) => setCertificationType(e.target.value)}
+                    value={certificationType}
+                  />
 
-            <label htmlFor="certExpiry" className="create-profile__label">
-              Expiration Date
-            </label>
-            <input
-              type="date"
-              className="create-profile__input"
-              onChange={(e) => setCertificationExpiry(e.target.value)}
-              value={certificationExpiry}
-            />
-            <button className="btn-secondary">Add Another</button>
-            <div className="flex-row-center">
-              <button
-                onClick={() => {
-                  setShowInterests(true);
-                  setShowCertifications(false);
-                }}
-                className="btn-cta"
-              >
-                Back
-              </button>
-              <button
-                className="btn-cta"
-                onClick={() => {
-                  setShowCertifications(false);
-                  setShowCertificationFile(true);
-                }}
-              >
-                Next
-              </button>
-            </div>
-          </>
-        ) : (
-          ""
-        )}
-
-        {showCertificationFile ? (
-          <>
-            <h1>Hi, {name}</h1>
-            <label htmlFor="certFile">Upload</label>
-            <input type="file" />
-            <button
-              className={!uploadedCert ? "btn-upload" : "btn-success"}
-              type="button"
-              onClick={() => {
-                setUploadedCert(true);
-              }}
-            >
-              {!uploadedCert ? "upload img" : "✅ success"}
-            </button>
-
-            <div className="flex-row-center">
-              <button className="btn-cta">Back</button>
-              <button
-                className="btn-cta"
-                onClick={() => {
-                  setShowCertificationFile(false);
-                  setShowAddress(true);
-                }}
-              >
-                Next
-              </button>
+                  <label htmlFor="certExpiry" class="create-profile__label">
+                    Expiration Date
+                  </label>
+                  <input
+                    type="date"
+                    className="create-profile__input"
+                    onChange={(e) => setCertificationExpiry(e.target.value)}
+                    value={certificationExpiry}
+                  />
+                  <button className="btn-secondary">Add Certification +</button>
+                </div>
+                <div className="btn-container btn-container--left">
+                  <button
+                    className="btn-back"
+                    type="button"
+                    onClick={() => {
+                      setShowCertifications(false);
+                      setShowSkills(true);
+                    }}
+                  >
+                    <img
+                      src={backArrow}
+                      alt="back arrow"
+                      class="btn-back-img"
+                    />
+                  </button>
+                  <button
+                    className="btn-cta"
+                    type="button"
+                    onClick={() => {
+                      setShowCertifications(false);
+                      setShowAddress(true);
+                    }}
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+              <div class="create-profile-col__right">
+                <img
+                  class="image"
+                  src={happyFaces}
+                  alt="pastel circles on green background and a happy face"
+                />
+              </div>
             </div>
           </>
         ) : (
@@ -415,68 +629,73 @@ const CreateProfile = () => {
 
         {showAddress ? (
           <>
-            <div className="label-col-container">
-              <label htmlFor="address">What is your address?</label>
-              <input
-                type="text"
-                onChange={(e) => setAddress(e.target.value)}
-                value={address}
-              />
+            <div class="create-profile-row">
+              <div class="create-profile-col__left">
+                <div class="page-label">
+                  <h6>Create A Profile</h6>
+                  <h1>Personal Information</h1>
+                </div>
+                <div class="input-fields">
+                  <label htmlFor="address" class="create-profile__label">
+                    What is your address?
+                  </label>
+                  <input
+                    type="text"
+                    onChange={(e) => setAddress(e.target.value)}
+                    value={address}
+                    class="create-profile__input"
+                  />
+                </div>
+                <div class="label-col-container">
+                  <label htmlFor="dob" class="create-profile__label">
+                    What is your DOB?
+                  </label>
+                  <input
+                    class="create-profile__input"
+                    type="text"
+                    value={dob}
+                    onChange={(e) => setDob(e.target.value)}
+                  />
+                </div>
+                <div className="btn-container btn-container--left">
+                  <button
+                    className="btn-back"
+                    type="button"
+                    onClick={() => {
+                      setShowCertifications(false);
+                      setShowSkills(true);
+                    }}
+                  >
+                    <img
+                      src={backArrow}
+                      alt="back arrow"
+                      class="btn-back-img"
+                    />
+                  </button>
+                  <button
+                    className="btn-cta"
+                    type="submit"
+                    onClick={(e) => {
+                      navigate("/login");
+                      handleCreateProfile(e);
+                    }}
+                  >
+                    Finish
+                  </button>
+                </div>
+              </div>
+              <div class="create-profile-col__right">
+                <img
+                  class="image"
+                  src={happyFaces}
+                  alt="pastel circles on green background and a happy face"
+                />
+              </div>
             </div>
-            <div className="label-col-container">
-              <label htmlFor="dob">What is your DOB?</label>
-              <input
-                type="text"
-                value={dob}
-                onChange={(e) => setDob(e.target.value)}
-              />
-            </div>
-            <button
-              className="btn-cta"
-              onClick={() => {
-                setShowAddress(false);
-                setShowLicense(true);
-              }}
-            >
-              Next
-            </button>
           </>
         ) : (
           ""
         )}
-
-        {showLicense ? (
-          <>
-            <label htmlFor="license">Upload ID</label>
-            <input type="file" />
-
-            <button
-              className={!uploadedLicense ? "btn-upload" : "btn-success"}
-              type="button"
-              onClick={() => {
-                setUploadedLicense(true);
-              }}
-            >
-              {!uploadedLicense ? "upload license" : "✅ success"}
-            </button>
-
-            <button
-              className="btn-cta"
-              type="submit"
-              onClick={(e) => {
-                setShowLicense(false);
-                setSuccess(true);
-                handleCreateProfile(e);
-              }}
-            >
-              Finish
-            </button>
-          </>
-        ) : (
-          ""
-        )}
-
-        {success ? <h1>User Created!</h1> : ""}
       </form>
     </section>
   );

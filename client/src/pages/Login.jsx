@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import AuthContext from "../context/AuthProvider";
+import happyFaces from "../assets/happyfaces.png";
 
 import axios from "../api/axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -83,79 +84,88 @@ const Login = () => {
     }
   };
   return (
-    <section className="login">
-      <div className="login__container-left">
-        <h1 className="login__header">Sign In</h1>
-        <p className="login__description mb-1p5 text--bold mb-">
-          Enter your account details
-        </p>
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="label-col-container">
-            <label htmlFor="username" className="login-form__label">
-              Username (user@gmail.com)
-            </label>
-            <input
-              onChange={(e) => {
-                setUser(e.target.value);
-              }}
-              type="text"
-              id="username"
-              autoComplete="off"
-              value={user}
-              required
-              placeholder="example@email.com"
-              className="login-form__input"
-            />
+    <>
+      <div class="create-profile-row">
+        <div class="create-profile-col__left">
+          <div class="page-label">
+            <h6>Sign In</h6>
+            <h1>Welcome Back!</h1>
           </div>
-          <div className="label-col-container">
-            <label htmlFor="pwd" className="login-form__label mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              onChange={(e) => {
-                setPwd(e.target.value);
-              }}
-              value={pwd}
-              id="pwd"
-              required
-              placeholder="password"
-              className="login-form__input login-form__input--password"
-            />
-            <p id="uidnote" className="login-form__instructions">
-              Forgot Password?
-            </p>
-          </div>
-
-          <div className="flex-col-center">
-            {errMsg ? (
-              <p aria-live="assertive" className="login__error">
-                {errMsg}
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="label-col-container">
+              <label htmlFor="username" className="create-profile__label">
+                Username (user@gmail.com)
+              </label>
+              <input
+                onChange={(e) => {
+                  setUser(e.target.value);
+                }}
+                type="text"
+                id="username"
+                autoComplete="off"
+                value={user}
+                required
+                placeholder="example@email.com"
+                className="create-profile__input"
+              />
+            </div>
+            <div className="label-col-container">
+              <label htmlFor="pwd" className="create-profile__label mb-1">
+                Password
+              </label>
+              <input
+                type="password"
+                onChange={(e) => {
+                  setPwd(e.target.value);
+                }}
+                value={pwd}
+                id="pwd"
+                required
+                placeholder="password"
+                className="create-profile__input"
+              />
+              <p id="uidnote" className="login-form__instructions">
+                Forgot Password?
               </p>
-            ) : (
-              ""
-            )}
+            </div>
 
-            <button
-              disabled={user && pwd ? false : true}
-              onSubmit={handleSubmit}
-              className="login__btn-cta"
-            >
-              Sign In
-            </button>
-            <p className="register__text register__text--subtle">
-              New here?{" "}
-              <Link
-                to="/register"
-                className="register__text register__text--subtle text--underline"
+            <div className="flex-col-center">
+              {errMsg ? (
+                <p aria-live="assertive" className="login__error">
+                  {errMsg}
+                </p>
+              ) : (
+                ""
+              )}
+
+              <button
+                disabled={user && pwd ? false : true}
+                onSubmit={handleSubmit}
+                className="btn-cta"
               >
-                Sign Up instead
-              </Link>
-            </p>
-          </div>
-        </form>
+                Sign In
+              </button>
+              <p className="register__text register__text--subtle">
+                New here?{" "}
+                <Link
+                  to="/register"
+                  className="register__text register__text--subtle text--underline"
+                >
+                  Sign Up instead
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
+        <div class="create-profile-col__right">
+          <img
+            class="image"
+            src={happyFaces}
+            alt="pastel circles on green background and a happy face"
+          />
+        </div>
       </div>
-    </section>
+    </>
   );
 };
 

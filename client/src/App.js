@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import ExpandProject from "./pages/ExpandProject";
 import Discover from "./pages/Discover";
 import Messages from "./pages/Messages";
+import ExpandProjectVolunteer from "./pages/ExpandProjectVolunteer";
+import ExpandProjectDonate from "./pages/ExpandProjectDonate";
 
 function App() {
   return (
@@ -23,6 +25,11 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/createproject" element={<CreateProject />} />
       <Route path="/expandproject" element={<ExpandProject />} />
+      <Route
+        path="/expandproject/volunteer"
+        element={<ExpandProjectVolunteer />}
+      />
+      <Route path="/expandproject/donate" element={<ExpandProjectDonate />} />
     </Routes>
   );
 }
