@@ -1,12 +1,12 @@
 import React from "react";
 import ProjectCard from "./ProjectCard";
 
-const AllProjects = ({ currentProjects }) => {
+const AllProjects = ({ projects }) => {
   return (
     <div>
       <h4>All Projects</h4>
       <div className="card-container">
-        {currentProjects?.map((project, index) => (
+        {projects?.map((project, index) => (
           <ProjectCard project={project} />
         ))}
       </div>

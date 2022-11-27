@@ -211,6 +211,8 @@ app.post("/api/createproject", async (req, res) => {
       volunteersYouHaveArray,
       volunteersYouNeedArray,
       issuesArray,
+      dateCreated: "2022-11-25",
+      date: "2022-12-25",
     });
     console.log("Project was created:", res);
 
@@ -276,6 +278,20 @@ app.post("/api/getproject", async (req, res) => {
   }
 });
 
+// Get all projects
+app.get("/api/getallprojects", async (req, res) => {
+  try {
+    console.log("getting all projects");
+
+    // step 1: Return all Projects
+    const allProjects = await Project.find({});
+
+    res.send(allProjects);
+    // return the projects
+  } catch (error) {
+    console.log(error);
+  }
+});
 // port
 const findUser = async (_id) => {
   return User.findOne({ _id });

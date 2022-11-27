@@ -1,19 +1,19 @@
 import React from "react";
+import CurrentProjects from "../components/CurrentProjects";
 import NavbarColumn from "../components/NavbarColumn";
 import { Link } from "react-router-dom";
 import avatar from "../assets/avatar.png";
 
-import CreateProjectForm from "../components/CreateProjectForm";
-const CreateProject = () => {
+const Messages = () => {
   return (
     <section className="layout">
       <div className="sidebar">
-        <NavbarColumn active="createproject" />
+        <NavbarColumn active="messages" />
       </div>
 
       <main className="dashboard">
         <header className="dashboard-header">
-          <h6>Create Project</h6>
+          <h6>Messages</h6>
           <div className="links">
             <Link to="/settings" className="link">
               Settings
@@ -23,20 +23,10 @@ const CreateProject = () => {
             </Link>
           </div>
         </header>
-        <div>
-          <div>
-            <h1>Select Either</h1>
-            <button>Create New</button>
-            <button>Use Past Projects</button>
-          </div>
-          <div>
-            <h1>Drafts</h1>
-          </div>
-          <CreateProjectForm />
-        </div>
+        <p>Coming Soon!</p>
       </main>
     </section>
   );
 };
 
-export default CreateProject;
+export default Messages;

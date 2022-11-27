@@ -41,7 +41,7 @@ const Navbar = ({ active }) => {
             : " btn-navbar"
         }
       >
-        <Link className="link" to="/browse">
+        <Link className="link" to="/discover">
           <img src={discoverIcon} alt="dashboard icon" className="link-img" />
           Discover
         </Link>

@@ -79,7 +79,7 @@ const Dashboard = () => {
 
       <main className="dashboard">
         <header className="dashboard-header">
-          <h1>Dashboard</h1>
+          <h6>Dashboard</h6>
           <div className="links">
             <Link to="/settings" className="link">
               Settings
