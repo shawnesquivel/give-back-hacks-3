@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CurrentProjects from "../components/CurrentProjects";
 import NavbarColumn from "../components/NavbarColumn";
-
 import axios from "../api/axios";
 import useAuth from "../hooks/useAuth";
 import AuthContext from "../context/AuthProvider";
@@ -32,7 +31,6 @@ const Dashboard = () => {
     });
 
     setUserData(response.data.user);
-    console.log("updating user", response.data.user);
   };
 
   // get current projects
@@ -43,9 +41,7 @@ const Dashboard = () => {
   }, [userData]);
 
   const getAllCurrentProjects = async (user) => {
-    console.log(user.currentProjects);
-
-    user.currentProjects.forEach(async (project) => {
+    user?.currentProjects?.forEach(async (project) => {
       await getProjectData(project);
     });
   };
@@ -64,19 +60,19 @@ const Dashboard = () => {
       });
 
       console.log("Response:", response);
-      setCurrentProjects((currentProjects) => [
-        ...currentProjects,
-        response.data.project,
-      ]);
+
+      pushProjectToCurrentProjects(response.data.project);
     } catch (err) {
       console.log(err);
     }
+  };
+  const pushProjectToCurrentProjects = (project) => {
+    setCurrentProjects((currentProjects) => [...currentProjects, project]);
   };
 
   return (
     <section className="layout">
       <div className="sidebar">
-        <img src="" alt="logo" />
         <NavbarColumn />
       </div>
 

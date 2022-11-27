@@ -1,12 +1,9 @@
 import React from "react";
 import NavbarColumn from "../components/NavbarColumn";
-import DiscoverSustainability from "../components/DiscoverSustainability";
-import DiscoverRecommended from "../components/DiscoverRecommended";
-import DiscoverLocal from "../components/DiscoverLocal";
 
 import { Link } from "react-router-dom";
 
-const Browse = () => {
+const Discover = () => {
   return (
     <section className="layout">
       <div className="sidebar">
@@ -15,7 +12,7 @@ const Browse = () => {
 
       <main className="dashboard">
         <header className="dashboard-header">
-          <h1>Discover</h1>
+          <h1>Dashboard</h1>
           <div className="links">
             <Link to="/settings">Settings</Link>
             <Link to="/profile">
@@ -23,12 +20,9 @@ const Browse = () => {
             </Link>
           </div>
         </header>
-        <DiscoverRecommended />
-        <DiscoverLocal />
-        <DiscoverSustainability />
       </main>
     </section>
   );
 };
 
-export default Browse;
+export default Discover;

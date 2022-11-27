@@ -1,3 +1,5 @@
+@use "partials/index" as *;
+
 .links {
   display: flex;
   flex-direction: row;
@@ -9,7 +11,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
+    gap: 1rem;
   }
 }
 
@@ -43,6 +46,22 @@
   border-radius: 15px;
   border: none;
   padding: 0.3rem 0.5rem;
+
+  &-navbar {
+    width: 10rem;
+    background: $offwhite;
+    border-radius: 10px;
+    color: $black;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    &--active {
+      background: $mint;
+    }
+    &:hover {
+      background: $mint;
+    }
+  }
 
   &-cta {
     border-radius: 15px;
@@ -135,18 +154,14 @@ table {
 
 td,
 th {
-  border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
 }
 
 .layout {
   display: flex;
   flex-direction: row;
+  background-color: $offwhite;
 }
 
 .sidebar {
@@ -160,6 +175,7 @@ tr:nth-child(even) {
   flex-direction: column;
   width: 100%;
   margin: 3rem;
+  background-color: #f4f3ef;
 }
 
 .dashboard-header {
@@ -167,17 +183,150 @@ tr:nth-child(even) {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  background-color: #f4f3ef;
 }
 
 h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
   margin: 0;
+}
+
+h4 {
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: $black;
+  margin-bottom: 1.5rem;
+}
+
+h5 {
+  font-family: "Manrope Regular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+h6 {
+  font-family: "Manrope Regular";
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: $green;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .card-container {
   display: flex;
   flex-wrap: row;
+  background-color: #f4f3ef;
+  gap: 0.5rem;
+}
+
+.card {
+  background-color: $purple;
+  background: #fcfcfc;
+  box-shadow: 0px 2px 3px rgba(210, 210, 210, 0.1);
+  border-radius: 11px;
+  border: none;
+}
+
+.logo {
+  width: 134.73px;
+  height: 16px;
+}
+
+.expand-project-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 24px;
+  gap: 32px;
+
+  width: 552px;
+
+  background: $neutral-white;
+  /* Soft Dropshadow */
+
+  box-shadow: 0px 2px 3px rgba(210, 210, 210, 0.1);
+  border-radius: 11px;
+  margin-bottom: 2rem;
+
+  &--col {
+    flex-direction: column;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.c-black {
+  color: $black;
+}
+
+.c-green {
+  color: $green;
+}
+
+.border {
+  border: 1px solid rgb(202, 202, 202);
+}
+.btn-purple {
+  background-color: $purple;
+  color: $black;
+  border: none;
+  box-shadow: 0px 2px 10px rgba(42, 43, 41, 0.03);
+  border-radius: 8px;
+  padding: 8px 32px;
+  width: 100%;
+  font-family: "Manrope Bold";
+}
+
+.comment-card {
+  width: 100%;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar-sm {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.comment-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+body {
+  font-family: "Manrope Regular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 16px;
+  color: #000000;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
 }

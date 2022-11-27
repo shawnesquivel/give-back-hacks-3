@@ -2,30 +2,39 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../index.scss";
 
+import logo from "../assets/humankynd-logo.png";
+
 const Navbar = () => {
+  // to do: make it active
+
   return (
     <nav className="links--col">
-      <Link className="link" to="/">
-        Home
-      </Link>
-      <Link className="link" to="/login">
-        Login
-      </Link>
-      <Link className="link" to="/createprofile">
-        Create Profile
-      </Link>
-      <Link className="link" to="/dashboard">
-        Dashboard
-      </Link>
-      <Link className="link" to="/browse">
-        Browse
-      </Link>
-      <Link className="link" to="/profile">
-        Profile
-      </Link>
-      <Link className="link" to="/createproject">
-        Create Project
-      </Link>
+      <button className="btn-navbar">
+        <Link className="link" to="/">
+          <img src={logo} alt="logo" className="logo" />
+        </Link>
+      </button>
+
+      <button className="btn-navbar">
+        <Link className="link" to="/dashboard">
+          Dashboard
+        </Link>
+      </button>
+      <button className="btn-navbar">
+        <Link className="link" to="/browse">
+          Discover
+        </Link>
+      </button>
+      <button className="btn-navbar">
+        <Link className="link" to="/createproject">
+          Create Project
+        </Link>
+      </button>
+      <button className="btn-navbar">
+        <Link className="link" to="/messages">
+          Messages
+        </Link>
+      </button>
     </nav>
   );
 };

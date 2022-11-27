@@ -8,6 +8,7 @@ import Browse from "./pages/Browse";
 import Profile from "./pages/Profile";
 import CreateProject from "./pages/CreateProject";
 import Login from "./pages/Login";
+import ExpandProject from "./pages/ExpandProject";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path="/browse" element={<Browse />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/createproject" element={<CreateProject />} />
+      <Route path="/expandproject" element={<ExpandProject />} />
     </Routes>
   );
 }

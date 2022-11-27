@@ -1,11 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ProjectCard = ({ project }) => {
   return (
-    <div key={project._id}>
-      <h1>{project.title}</h1>
-      <p> {project.description}</p>
-    </div>
+    <button key={project._id} className="card">
+      <Link to="/expandproject" state={{ data: project }}>
+        <h1>{project.title}</h1>
+        <p> {project.description}</p>
+      </Link>
+    </button>
   );
 };
 
