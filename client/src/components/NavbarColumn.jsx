@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import "../index.scss";
 
 import logo from "../assets/humankynd-logo.png";
+import dashboardIcon from "../assets/dashboard-icon.png";
+import discoverIcon from "../assets/discover-icon.png";
+import createProjectIcon from "../assets/createprofile-icon.png";
+import msgIcon from "../assets/messages-icon.png";
 
 const Navbar = () => {
   // to do: make it active
@@ -17,21 +21,29 @@ const Navbar = () => {
 
       <button className="btn-navbar">
         <Link className="link" to="/dashboard">
+          <img src={dashboardIcon} alt="dashboard icon" className="link-img" />
           Dashboard
         </Link>
       </button>
       <button className="btn-navbar">
         <Link className="link" to="/browse">
+          <img src={discoverIcon} alt="dashboard icon" className="link-img" />
           Discover
         </Link>
       </button>
       <button className="btn-navbar">
         <Link className="link" to="/createproject">
+          <img
+            src={createProjectIcon}
+            alt="dashboard icon"
+            className="link-img"
+          />
           Create Project
         </Link>
       </button>
       <button className="btn-navbar">
         <Link className="link" to="/messages">
+          <img src={msgIcon} alt="dashboard icon" className="link-img" />
           Messages
         </Link>
       </button>

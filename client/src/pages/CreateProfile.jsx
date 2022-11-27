@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
 import "../index.scss";
 import axios from "../api/axios";
 
@@ -105,7 +104,6 @@ const CreateProfile = () => {
 
   return (
     <section className="createprofile">
-      <Navbar />
       <h1 className="title">{!name ? "Welcome." : `Welcome, ${name}.`}</h1>
       {showWelcome ? (
         <>

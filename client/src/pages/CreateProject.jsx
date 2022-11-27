@@ -1,12 +1,10 @@
 import React from "react";
 
-import Navbar from "../components/Navbar";
 import CreateProjectForm from "../components/CreateProjectForm";
 import ProjectCard from "../components/ProjectCard";
 const CreateProject = () => {
   return (
     <div>
-      <Navbar />
       <h1>Create Project</h1>
 
       <div>

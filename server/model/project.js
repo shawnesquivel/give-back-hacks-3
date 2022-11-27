@@ -48,6 +48,7 @@ const ProjectSchema = new mongoose.Schema(
     type: String,
     size: Number,
     tasks: [String],
+    date: Date,
     dateCreated: Date,
   },
   { collection: "projects" }

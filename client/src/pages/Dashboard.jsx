@@ -73,7 +73,7 @@ const Dashboard = () => {
   return (
     <section className="layout">
       <div className="sidebar">
-        <NavbarColumn />
+        <NavbarColumn active={"dashboard"} />
       </div>
 
       <main className="dashboard">

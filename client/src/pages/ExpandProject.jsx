@@ -144,7 +144,7 @@ const ExpandProject = ({}) => {
             {/* Updates */}
 
             <h4>Updates</h4>
-            <div className="expand-project-card">
+            <div className="expand-project-card expand-project-card--col">
               <div className="comment-card">
                 <div className="comment-header">
                   <div className="comment-header-left">
@@ -158,12 +158,35 @@ const ExpandProject = ({}) => {
                   about 15 minutes before start time. Thanks!
                 </p>
               </div>
+              <div className="comment-card">
+                <div className="comment-header">
+                  <div className="comment-header-left">
+                    <img src={avatar} alt="" className="avatar-sm" />
+                    <p>Rick Shaw</p>
+                  </div>
+                  <p style={{ color: "darkgrey" }}>2h ago</p>
+                </div>
+                <p>
+                  Hi everyone, I just pushed the date a week ahead due to some
+                  scheduling conflicts. Please update your RSVP!
+                </p>
+              </div>
+              <div className="comment-card">
+                <div className="comment-header">
+                  <div className="comment-header-left">
+                    <img src={avatar} alt="" className="avatar-sm" />
+                    <p>Rick Shaw</p>
+                  </div>
+                  <p style={{ color: "darkgrey" }}>2h ago</p>
+                </div>
+                <p>Anyone got garbage bags?????</p>
+              </div>
             </div>
           </div>
 
           <div className="col">
             <h4>Help</h4>
-            <div className="expand-project-card expand-project-card--col">
+            <div className="expand-project-card expand-project-card--col expand-project-card--sm">
               <div className="comment-header-left">
                 <img src={avatar} className="avatar-sm" alt="avatar" />
                 <h5 className="">Rick Smith</h5>

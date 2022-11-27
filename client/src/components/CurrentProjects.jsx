@@ -4,7 +4,7 @@ import ProjectCard from "./ProjectCard";
 const CurrentProjects = ({ currentProjects }) => {
   return (
     <div>
-      <h2>Your Projects</h2>
+      <h4>Your Projects</h4>
       <div className="card-container">
         {currentProjects?.map((project, index) => (
           <ProjectCard project={project} />

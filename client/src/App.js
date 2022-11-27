@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import CreateProfile from "./pages/CreateProfile";
-import CreateProfilePageTwo from "./pages/CreateProfilePageTwo";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Browse from "./pages/Browse";
@@ -16,7 +15,6 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route exact path="/createprofile" element={<CreateProfile />}></Route>
-      <Route path="/createprofile/2" element={<CreateProfilePageTwo />} />
       <Route path="/createprofile" element={<CreateProfile />} />
       <Route path="/createprofile" element={<CreateProfile />} />
       <Route path="/dashboard" element={<Dashboard />} />
