@@ -1,17 +1,19 @@
 import React from "react";
+import { useEffect } from "react";
 import ProjectCard from "./ProjectCard";
-import { Link } from "react-router-dom";
-const CurrentProjects = () => {
+
+const CurrentProjects = ({ currentProjects }) => {
+  useEffect(() => {
+    console.log(currentProjects);
+  }, []);
   return (
     <div>
-      <h1>Current Projects</h1>
-      <ProjectCard />
-      <h1>Current Volunteer</h1>
-      <ProjectCard />
-      <h1>Current Funding</h1>
-      <ProjectCard />
-      <h1>Recommended</h1>
-      <ProjectCard />
+      <h2>Your Projects</h2>
+      <div className="card-container">
+        {currentProjects?.map((project, index) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -231,13 +231,58 @@ app.post("/api/createproject", async (req, res) => {
   res.json({ status: "OK", project: projectData });
 });
 
+app.post("/api/getuser", async (req, res) => {
+  console.log("Inside the Get Profile Endpoint");
+  // Payload contains JWT and user
+  console.log(req.body);
+  const { token } = req.body;
+  console.log(token);
+
+  try {
+    const [user, _id] = verifyJWT(token);
+    const userRecord = await findUser(_id);
+
+    console.log("User Record", user, _id, userRecord);
+
+    res.json({ status: "OK", user: userRecord });
+  } catch (err) {
+    console.log(err);
+    res.json({ status: "Error", error: "Could not verify identity" });
+  }
+});
+
+// Get a single project based on its ID
+app.post("/api/getproject", async (req, res) => {
+  console.log("Inside the Get Project Endpoint");
+  console.log(req.body);
+  const { projectID } = req.body;
+
+  try {
+    const projectRecord = await Project.findOne({
+      _id: mongoose.Types.ObjectId(projectID),
+    });
+
+    if (projectRecord) {
+      console.log("got the project!");
+    } else {
+      console.log("cannot find project");
+    }
+
+    console.log("Retrieved the project", projectRecord);
+    res.json({ status: "got project!", project: projectRecord });
+  } catch (err) {
+    console.log(err);
+    res.json({ status: "Error", error: "Could not find project" });
+  }
+});
+
 // port
 const findUser = async (_id) => {
   return User.findOne({ _id });
 };
 const verifyJWT = (token) => {
   // Verify the user, return the user + id
-  const user = jwt.verify(JSON.parse(token).token, JWT_SECRET_KEY);
+  const user = jwt.verify(JSON.parse(token).token, process.env.JWT_SECRET_KEY);
   const _id = user.id;
   return [user, _id];
 };

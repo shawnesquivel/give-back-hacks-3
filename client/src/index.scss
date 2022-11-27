@@ -143,3 +143,41 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.layout {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  height: 100vh;
+  margin: 3rem;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  width: 100%;
+  margin: 3rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: row;
+}
