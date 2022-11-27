@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../index.scss";
 import axios from "../api/axios";
-
+import landingImg from "../assets/createprofile-start.png";
 const REGISTER_URL = "/api/register";
 
 const CreateProfile = () => {
@@ -103,21 +103,37 @@ const CreateProfile = () => {
   };
 
   return (
-    <section className="createprofile">
-      <h1 className="title">{!name ? "Welcome." : `Welcome, ${name}.`}</h1>
+    <section className="create-profile">
       {showWelcome ? (
         <>
-          <h3>Get ready to connect</h3>
-          <div className="flex-row-center">
-            <button
-              className="btn-cta"
-              onClick={() => {
-                setShowWelcome(false);
-                setShowName(true);
-              }}
-            >
-              I'm Ready
-            </button>
+          <div class="create-profile-row">
+            <div class="create-profile-col__left">
+              <div class="page-label">
+                <h1 class="title">
+                  Start with your why and we’ll take care of the how.
+                </h1>
+                <h3>
+                  Create a profile and find ways to be kind in your community.
+                  <span className="bold">Ready to make a difference?</span>
+                </h3>
+              </div>
+              <button
+                className="btn-cta"
+                onClick={() => {
+                  setShowWelcome(false);
+                  setShowName(true);
+                }}
+              >
+                I'm Ready
+              </button>
+            </div>
+            <div class="create-profile-col__right">
+              <img
+                class="image"
+                src={landingImg}
+                alt="two women volunteers smiling at a laptop"
+              />
+            </div>
           </div>
         </>
       ) : (

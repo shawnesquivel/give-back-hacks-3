@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import avatar from "../assets/avatar.png";
-
+const moment = require("moment");
 const ProjectCard = ({ project }) => {
   return (
     <button key={project._id} className="card">
@@ -13,7 +13,10 @@ const ProjectCard = ({ project }) => {
         </div>
         <p>
           {" "}
-          {!project.date ? "Feb 23, 2023" : ""} @ {project.time}
+          {!project.date
+            ? "Feb 23, 2023"
+            : `${moment(project.date).format("MMMM Do YYYY")}`}{" "}
+          @ {project.time}
         </p>
       </Link>
     </button>
