@@ -7,10 +7,13 @@ import dashboardIcon from "../assets/dashboard-icon.png";
 import discoverIcon from "../assets/discover-icon.png";
 import createProjectIcon from "../assets/createprofile-icon.png";
 import msgIcon from "../assets/messages-icon.png";
+import { useEffect } from "react";
 
-const Navbar = () => {
+const Navbar = ({ active }) => {
   // to do: make it active
-
+  useEffect(() => {
+    console.log(active);
+  }, []);
   return (
     <nav className="links--col">
       <button className="btn-navbar">
@@ -19,19 +22,37 @@ const Navbar = () => {
         </Link>
       </button>
 
-      <button className="btn-navbar">
+      <button
+        className={
+          active === "dashboard"
+            ? "btn-navbar btn-navbar--active"
+            : " btn-navbar"
+        }
+      >
         <Link className="link" to="/dashboard">
           <img src={dashboardIcon} alt="dashboard icon" className="link-img" />
           Dashboard
         </Link>
       </button>
-      <button className="btn-navbar">
+      <button
+        className={
+          active === "discover"
+            ? "btn-navbar btn-navbar--active"
+            : " btn-navbar"
+        }
+      >
         <Link className="link" to="/browse">
           <img src={discoverIcon} alt="dashboard icon" className="link-img" />
           Discover
         </Link>
       </button>
-      <button className="btn-navbar">
+      <button
+        className={
+          active === "createproject"
+            ? "btn-navbar btn-navbar--active"
+            : " btn-navbar"
+        }
+      >
         <Link className="link" to="/createproject">
           <img
             src={createProjectIcon}
@@ -41,7 +62,13 @@ const Navbar = () => {
           Create Project
         </Link>
       </button>
-      <button className="btn-navbar">
+      <button
+        className={
+          active === "messages"
+            ? "btn-navbar btn-navbar--active"
+            : " btn-navbar"
+        }
+      >
         <Link className="link" to="/messages">
           <img src={msgIcon} alt="dashboard icon" className="link-img" />
           Messages

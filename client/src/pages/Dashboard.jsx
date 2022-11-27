@@ -5,6 +5,7 @@ import axios from "../api/axios";
 import useAuth from "../hooks/useAuth";
 import AuthContext from "../context/AuthProvider";
 import { Link } from "react-router-dom";
+import avatar from "../assets/avatar.png";
 
 const GETUSER_URL = "/api/getuser";
 const GET_PROJECT_URL = "/api/getproject";
@@ -73,21 +74,21 @@ const Dashboard = () => {
   return (
     <section className="layout">
       <div className="sidebar">
-        <NavbarColumn active={"dashboard"} />
+        <NavbarColumn active="dashboard" />
       </div>
 
       <main className="dashboard">
         <header className="dashboard-header">
           <h1>Dashboard</h1>
           <div className="links">
-            <Link to="/settings">Settings</Link>
+            <Link to="/settings" className="link">
+              Settings
+            </Link>
             <Link to="/profile">
-              <img src="" alt="avatar" />
+              <img src={avatar} alt="avatar" className="avatar-sm" />
             </Link>
           </div>
         </header>
-
-        {userData ? <p>Welcome back, {userData.name}!</p> : ""}
 
         <CurrentProjects currentProjects={currentProjects} />
       </main>
