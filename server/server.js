@@ -21,7 +21,7 @@ const jwt = require("jsonwebtoken");
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://humankynd.netlify.app",
     credentials: true,
   })
 );

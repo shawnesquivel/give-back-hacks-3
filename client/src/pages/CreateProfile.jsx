@@ -8,7 +8,7 @@ import backArrow from "../assets/back-arrow.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const REGISTER_URL = "https://humankynd.herokuapp.com/api/register";
+const REGISTER_URL = "/api/register";
 
 const CreateProfile = () => {
   const navigate = useNavigate(); // to use the navigate hook
