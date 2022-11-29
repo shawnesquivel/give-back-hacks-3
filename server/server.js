@@ -10,21 +10,23 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors"); // allow frontend to make requests to backend on different origins
 // Very sensitive - keep safe.
-const MONGOOSE_URL = "mongodb://127.0.0.1:27017/GiveBackHacks3";
+// const MONGOOSE_URL = "mongodb://127.0.0.1:27017/GiveBackHacks3";
+const MONGOOSE_URL =
+  "mongodb+srv://shawnesquivel:shawnesquivel@colabcluster.vp0vqew.mongodb.net/?retryWrites=true&w=majority";
 const moment = require("moment");
-const Project = require("./model/project");
-const User = require("./model/user");
+const Project = require("./model/Project");
+const User = require("./model/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// app
 app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
   })
 );
-
+// Testing if this is the issue
+// app.use(cors());
 app.use(bodyParser.json());
 
 // db
