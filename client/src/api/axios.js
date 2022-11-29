@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://humankynd.netlify.app/",
+  baseURL: "https://humankynd.herokuapp.com/",
 });
