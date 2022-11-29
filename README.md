@@ -13,9 +13,9 @@ Start with the why and we'll take care of the how.  HumanKynd is a crowdsource +
 6. [Contributions](#contributions)
 
 # Hackathon Final Deliverables
-- [View the Hackathon Submission](https://devpost.com/software/humankynd)
-- [View the Pitch Video on YouTube](https://youtu.be/sOoozI3wxjo)
-- [View the Pitch Deck](https://drive.google.com/file/d/16PCWAqhjEFvXcTZAmyP6mFx402bta1FY/view?usp=sharing)
+- [Submission](https://devpost.com/software/humankynd)
+- [Video](https://youtu.be/sOoozI3wxjo)
+- [Slide Deck](https://drive.google.com/file/d/16PCWAqhjEFvXcTZAmyP6mFx402bta1FY/view?usp=sharing)
 
 
 ## Problem: How do we increase the total amount of social good in our community?
