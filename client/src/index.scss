@@ -282,6 +282,10 @@ input[type="text"]:focus {
   &--left {
     justify-content: left;
   }
+
+  &--col {
+    flex-direction: column;
+  }
 }
 table {
   font-family: arial, sans-serif;

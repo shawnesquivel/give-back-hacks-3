@@ -15,7 +15,7 @@ import ExpandProjectDonate from "./pages/ExpandProjectDonate";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<CreateProfile />} />
       <Route path="/login" element={<Login />} />
       <Route exact path="/createprofile" element={<CreateProfile />}></Route>
       <Route path="/createprofile" element={<CreateProfile />} />

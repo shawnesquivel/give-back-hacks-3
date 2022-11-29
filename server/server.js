@@ -13,7 +13,7 @@ const cors = require("cors"); // allow frontend to make requests to backend on d
 const MONGOOSE_URL = "mongodb://127.0.0.1:27017/GiveBackHacks3";
 const moment = require("moment");
 const Project = require("./model/project");
-const User = require("./model/User");
+const User = require("./model/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -41,7 +41,7 @@ mongoose
 // middleware
 app.use("/api/", express.static(path.join(__dirname, "static")));
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log(`Server is online at Port ${port}`);
 });
 

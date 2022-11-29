@@ -6,6 +6,7 @@ import happyFaces from "../assets/happyfaces.png";
 import logo from "../assets/humankynd-logo.png";
 import backArrow from "../assets/back-arrow.png";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const REGISTER_URL = "/api/register";
 
@@ -136,6 +137,7 @@ const CreateProfile = () => {
                   I'm Ready
                 </button>
               </div>
+              <Link to="/login">Already Have An Account? Login</Link>
             </div>
             <div class="create-profile-col__right">
               <img
@@ -226,7 +228,7 @@ const CreateProfile = () => {
                   <h1>Enter a password</h1>
                 </div>
                 <div class="input-fields">
-                  <div>
+                  <div className="label-col-container">
                     <label htmlFor="pwd" className="create-profile__label">
                       Enter a password
                     </label>
@@ -286,7 +288,7 @@ const CreateProfile = () => {
                   <h1>What is your email?</h1>
                 </div>
                 <div class="input-fields">
-                  <div>
+                  <div className="label-col-container">
                     <label htmlFor="email" className="create-profile__label">
                       Please enter your email:
                     </label>
@@ -346,7 +348,7 @@ const CreateProfile = () => {
                   <h1>What are your interests?</h1>
                 </div>
                 <div class="input-fields">
-                  <div>
+                  <div className="label-col-container">
                     <label htmlFor="email" className="create-profile__label">
                       Type interests & press Enter
                     </label>

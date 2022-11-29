@@ -148,7 +148,7 @@ const Login = () => {
               <p className="register__text register__text--subtle">
                 New here?{" "}
                 <Link
-                  to="/register"
+                  to="/createprofile"
                   className="register__text register__text--subtle text--underline"
                 >
                   Sign Up instead
