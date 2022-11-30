@@ -133,7 +133,8 @@ app.post("/api/login", async (req, res) => {
           id: userRecord._id,
           username: userRecord.username,
         },
-        process.env.JWT_SECRET_KEY
+        // process.env.JWT_SECRET_KEY
+        "seagulls"
       );
       console.log(token);
       if (token) {
@@ -149,8 +150,8 @@ app.post("/api/login", async (req, res) => {
       return res.json({ status: "wrong password" });
     }
   } catch (error) {
-    console.log(err);
-    if (err.code === 11000) {
+    console.log(error);
+    if (error.code === 11000) {
       return res.json({
         status: "error",
         error: "Cannot find login",
