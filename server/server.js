@@ -107,39 +107,50 @@ app.post("/api/login", async (req, res) => {
 
   // Find the User record
   // .lean() returns a Plain Old Java Object (POJO) instead of the entire
-  const userRecord = await User.findOne({ username: user }).exec();
+  try {
+    const userRecord = await User.findOne({ username: user }).exec();
 
-  console.log("User in Database:", userRecord);
+    console.log("User in Database:", userRecord);
 
-  if (!userRecord) {
-    return res.json({
-      status: "error",
-      error: "username/pwd is incorrect",
-    });
-  }
-
-  // Compares the password and the hashed password
-  if (await bcrypt.compare(pwd, userRecord.password)) {
-    // Public information, do not put sensitive info.
-    // The JWT signs the header/payload based on our signature.
-    const token = jwt.sign(
-      {
-        id: userRecord._id,
-        username: userRecord.username,
-      },
-      process.env.JWT_SECRET_KEY
-    );
-    console.log(token);
-    if (token) {
-      console.log("✅ signed JWT");
-
-      res.json({ status: "OK", token: token });
-    } else {
-      console.log("❌ didnt sign jwt");
+    if (!userRecord) {
+      return res.json({
+        status: "error",
+        error: "username/pwd is incorrect",
+      });
     }
-  } else {
-    console.log("inside the err2");
-    return res.json({ status: "error" });
+
+    // Compares the password and the hashed password
+    if (await bcrypt.compare(pwd, userRecord.password)) {
+      // Public information, do not put sensitive info.
+      // The JWT signs the header/payload based on our signature.
+      const token = jwt.sign(
+        {
+          id: userRecord._id,
+          username: userRecord.username,
+        },
+        process.env.JWT_SECRET_KEY
+      );
+      console.log(token);
+      if (token) {
+        console.log("✅ signed JWT");
+
+        res.json({ status: "OK", token: token });
+      } else {
+        console.log("❌ didnt sign jwt");
+      }
+    } else {
+      console.log("inside the err2");
+      return res.json({ status: "error" });
+    }
+  } catch (error) {
+    console.log(err);
+    if (err.code === 11000) {
+      return res.json({
+        status: "error",
+        error: "Username already in use!",
+      });
+    }
+    throw err;
   }
 });
 

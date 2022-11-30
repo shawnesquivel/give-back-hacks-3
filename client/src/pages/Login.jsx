@@ -154,6 +154,15 @@ const Login = () => {
                   Sign Up instead
                 </Link>
               </p>
+              <p className="register__text register__text--subtle">
+                New here?{" "}
+                <Link
+                  to="/dashboard"
+                  className="register__text register__text--subtle text--underline"
+                >
+                  TESTING: Dashboard
+                </Link>
+              </p>
             </div>
           </form>
         </div>
