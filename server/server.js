@@ -21,11 +21,16 @@ const jwt = require("jsonwebtoken");
 
 app.use(
   cors({
+    // remote
     origin: "https://humankynd.netlify.app",
+    // local
+    // origin: "http://localhost:3000",
     credentials: true,
+    // methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+    preflightContinue: false,
   })
 );
-// Testing if this is the issue
+// Cannot use below: cannot use wildcard * for allow-access-control-origin
 // app.use(cors());
 app.use(bodyParser.json());
 
@@ -137,17 +142,18 @@ app.post("/api/login", async (req, res) => {
         res.json({ status: "OK", token: token });
       } else {
         console.log("❌ didnt sign jwt");
+        res.json({ status: "❌ didnt sign jwt" });
       }
     } else {
       console.log("inside the err2");
-      return res.json({ status: "error" });
+      return res.json({ status: "wrong password" });
     }
   } catch (error) {
     console.log(err);
     if (err.code === 11000) {
       return res.json({
         status: "error",
-        error: "Username already in use!",
+        error: "Cannot find login",
       });
     }
     throw err;

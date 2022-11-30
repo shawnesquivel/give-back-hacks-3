@@ -116,10 +116,10 @@ const CreateProfile = () => {
       />
       {showWelcome ? (
         <>
-          <div class="create-profile-row">
-            <div class="create-profile-col__left">
-              <div class="page-label">
-                <h1 class="title">
+          <div className="create-profile-row">
+            <div className="create-profile-col__left">
+              <div className="page-label">
+                <h1 className="title">
                   Start with your why and we’ll take care of the how~
                 </h1>
                 <h3>
@@ -140,9 +140,9 @@ const CreateProfile = () => {
               </div>
               <Link to="/login">Already Have An Account? Login</Link>
             </div>
-            <div class="create-profile-col__right">
+            <div className="create-profile-col__right">
               <img
-                class="image"
+                className="image"
                 src={landingImg}
                 alt="two women volunteers smiling at a laptop"
               />
@@ -161,15 +161,15 @@ const CreateProfile = () => {
       >
         {showName ? (
           <>
-            <div class="create-profile-row">
-              <div class="create-profile-col__left">
-                <div class="page-label">
+            <div className="create-profile-row">
+              <div className="create-profile-col__left">
+                <div className="page-label">
                   <h6 className="c-black">Create A Profile</h6>
                   <h1>What is your name?</h1>
                 </div>
-                <div class="input-fields">
+                <div className="input-fields">
                   <div>
-                    <label htmlFor="name" class="create-profile__label">
+                    <label htmlFor="name" className="create-profile__label">
                       Full Name
                     </label>
                     <br />
@@ -193,7 +193,7 @@ const CreateProfile = () => {
                     <img
                       src={backArrow}
                       alt="back arrow"
-                      class="btn-back-img"
+                      className="btn-back-img"
                     />
                   </button>
                   <button
@@ -208,9 +208,9 @@ const CreateProfile = () => {
                   </button>
                 </div>
               </div>
-              <div class="create-profile-col__right">
+              <div className="create-profile-col__right">
                 <img
-                  class="image"
+                  className="image"
                   src={happyFaces}
                   alt="pastel circles on green background and a happy face"
                 />
@@ -222,13 +222,13 @@ const CreateProfile = () => {
         )}
         {showPwd ? (
           <>
-            <div class="create-profile-row">
-              <div class="create-profile-col__left">
-                <div class="page-label">
+            <div className="create-profile-row">
+              <div className="create-profile-col__left">
+                <div className="page-label">
                   <h6 className="c-black">Create A Profile</h6>
                   <h1>Enter a password</h1>
                 </div>
-                <div class="input-fields">
+                <div className="input-fields">
                   <div className="label-col-container">
                     <label htmlFor="pwd" className="create-profile__label">
                       Enter a password
@@ -253,7 +253,7 @@ const CreateProfile = () => {
                     <img
                       src={backArrow}
                       alt="back arrow"
-                      class="btn-back-img"
+                      className="btn-back-img"
                     />
                   </button>
                   <button
@@ -268,9 +268,9 @@ const CreateProfile = () => {
                   </button>
                 </div>
               </div>
-              <div class="create-profile-col__right">
+              <div className="create-profile-col__right">
                 <img
-                  class="image"
+                  className="image"
                   src={happyFaces}
                   alt="pastel circles on green background and a happy face"
                 />
@@ -282,13 +282,13 @@ const CreateProfile = () => {
         )}
         {showEmail ? (
           <>
-            <div class="create-profile-row">
-              <div class="create-profile-col__left">
-                <div class="page-label">
+            <div className="create-profile-row">
+              <div className="create-profile-col__left">
+                <div className="page-label">
                   <h6 className="c-black">Create Login</h6>
                   <h1>What is your email?</h1>
                 </div>
-                <div class="input-fields">
+                <div className="input-fields">
                   <div className="label-col-container">
                     <label htmlFor="email" className="create-profile__label">
                       Please enter your email:
@@ -313,7 +313,7 @@ const CreateProfile = () => {
                     <img
                       src={backArrow}
                       alt="back arrow"
-                      class="btn-back-img"
+                      className="btn-back-img"
                     />
                   </button>
                   <button
@@ -328,9 +328,9 @@ const CreateProfile = () => {
                   </button>
                 </div>
               </div>
-              <div class="create-profile-col__right">
+              <div className="create-profile-col__right">
                 <img
-                  class="image"
+                  className="image"
                   src={happyFaces}
                   alt="pastel circles on green background and a happy face"
                 />
@@ -342,13 +342,13 @@ const CreateProfile = () => {
         )}
         {showInterests ? (
           <>
-            <div class="create-profile-row">
-              <div class="create-profile-col__left">
-                <div class="page-label">
+            <div className="create-profile-row">
+              <div className="create-profile-col__left">
+                <div className="page-label">
                   <h6 className="c-black">Create A Profile</h6>
                   <h1>What are your interests?</h1>
                 </div>
-                <div class="input-fields">
+                <div className="input-fields">
                   <div className="label-col-container">
                     <label htmlFor="email" className="create-profile__label">
                       Type interests & press Enter
@@ -386,7 +386,7 @@ const CreateProfile = () => {
                     <img
                       src={backArrow}
                       alt="back arrow"
-                      class="btn-back-img"
+                      className="btn-back-img"
                     />
                   </button>
                   <button
@@ -401,9 +401,9 @@ const CreateProfile = () => {
                   </button>
                 </div>
               </div>
-              <div class="create-profile-col__right">
+              <div className="create-profile-col__right">
                 <img
-                  class="image"
+                  className="image"
                   src={happyFaces}
                   alt="pastel circles on green background and a happy face"
                 />
@@ -428,13 +428,13 @@ const CreateProfile = () => {
 
         {showSkills ? (
           <>
-            <div class="create-profile-row">
-              <div class="create-profile-col__left">
-                <div class="page-label">
+            <div className="create-profile-row">
+              <div className="create-profile-col__left">
+                <div className="page-label">
                   <h6 className="c-black">Create A Profile</h6>
                   <h1>What are your skills?</h1>
                 </div>
-                <div class="input-fields">
+                <div className="input-fields">
                   <div>
                     <label htmlFor="email" className="create-profile__label">
                       What are your skills? (Press ENTER)
@@ -472,7 +472,7 @@ const CreateProfile = () => {
                     <img
                       src={backArrow}
                       alt="back arrow"
-                      class="btn-back-img"
+                      className="btn-back-img"
                     />
                   </button>
                   <button
@@ -487,9 +487,9 @@ const CreateProfile = () => {
                   </button>
                 </div>
               </div>
-              <div class="create-profile-col__right">
+              <div className="create-profile-col__right">
                 <img
-                  class="image"
+                  className="image"
                   src={happyFaces}
                   alt="pastel circles on green background and a happy face"
                 />
@@ -562,14 +562,14 @@ const CreateProfile = () => {
 
         {showCertifications ? (
           <>
-            <div class="create-profile-row">
-              <div class="create-profile-col__left">
-                <div class="page-label">
+            <div className="create-profile-row">
+              <div className="create-profile-col__left">
+                <div className="page-label">
                   <h6>Create A Profile</h6>
                   <h1>Do you have any certifications?</h1>
                 </div>
-                <div class="input-fields">
-                  <label htmlFor="certType" class="create-profile__label">
+                <div className="input-fields">
+                  <label htmlFor="certType" className="create-profile__label">
                     Type
                   </label>
                   <input
@@ -579,7 +579,7 @@ const CreateProfile = () => {
                     value={certificationType}
                   />
 
-                  <label htmlFor="certExpiry" class="create-profile__label">
+                  <label htmlFor="certExpiry" className="create-profile__label">
                     Expiration Date
                   </label>
                   <input
@@ -602,7 +602,7 @@ const CreateProfile = () => {
                     <img
                       src={backArrow}
                       alt="back arrow"
-                      class="btn-back-img"
+                      className="btn-back-img"
                     />
                   </button>
                   <button
@@ -617,9 +617,9 @@ const CreateProfile = () => {
                   </button>
                 </div>
               </div>
-              <div class="create-profile-col__right">
+              <div className="create-profile-col__right">
                 <img
-                  class="image"
+                  className="image"
                   src={happyFaces}
                   alt="pastel circles on green background and a happy face"
                 />
@@ -632,29 +632,29 @@ const CreateProfile = () => {
 
         {showAddress ? (
           <>
-            <div class="create-profile-row">
-              <div class="create-profile-col__left">
-                <div class="page-label">
+            <div className="create-profile-row">
+              <div className="create-profile-col__left">
+                <div className="page-label">
                   <h6>Create A Profile</h6>
                   <h1>Personal Information</h1>
                 </div>
-                <div class="input-fields">
-                  <label htmlFor="address" class="create-profile__label">
+                <div className="input-fields">
+                  <label htmlFor="address" className="create-profile__label">
                     What is your address?
                   </label>
                   <input
                     type="text"
                     onChange={(e) => setAddress(e.target.value)}
                     value={address}
-                    class="create-profile__input"
+                    className="create-profile__input"
                   />
                 </div>
-                <div class="label-col-container">
-                  <label htmlFor="dob" class="create-profile__label">
+                <div className="label-col-container">
+                  <label htmlFor="dob" className="create-profile__label">
                     What is your DOB?
                   </label>
                   <input
-                    class="create-profile__input"
+                    className="create-profile__input"
                     type="text"
                     value={dob}
                     onChange={(e) => setDob(e.target.value)}
@@ -672,7 +672,7 @@ const CreateProfile = () => {
                     <img
                       src={backArrow}
                       alt="back arrow"
-                      class="btn-back-img"
+                      className="btn-back-img"
                     />
                   </button>
                   <button
@@ -687,9 +687,9 @@ const CreateProfile = () => {
                   </button>
                 </div>
               </div>
-              <div class="create-profile-col__right">
+              <div className="create-profile-col__right">
                 <img
-                  class="image"
+                  className="image"
                   src={happyFaces}
                   alt="pastel circles on green background and a happy face"
                 />
