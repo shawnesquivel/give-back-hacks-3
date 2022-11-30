@@ -98,6 +98,7 @@ const CreateProfile = () => {
       console.log(response);
       if (response.status === 200) {
         setSuccess(true);
+        console.log(success);
       } else {
         alert(response.status);
       }

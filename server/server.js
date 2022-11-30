@@ -70,7 +70,7 @@ app.post("/api/register", async (req, res) => {
   } = req.body;
 
   const encryptedPwd = await bcrypt.hash(plainTextPwd, 10); // 10 = how slow the algo will be
-
+  let userRecord;
   // Create a record/document in the User model
   try {
     const res = await User.create({
@@ -86,6 +86,7 @@ app.post("/api/register", async (req, res) => {
       dob,
       license,
     });
+    userRecord = res;
     console.log("User was created successfully: ", res);
   } catch (err) {
     console.log(err);
@@ -97,7 +98,7 @@ app.post("/api/register", async (req, res) => {
     }
     throw err;
   }
-  res.json({ status: "OK" });
+  res.json({ status: "OK", data: userRecord });
 });
 
 app.post("/api/login", async (req, res) => {
