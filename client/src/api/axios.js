@@ -2,7 +2,7 @@ import axios from "axios";
 
 // remote
 export default axios.create({
-  baseURL: "http://humankynd.herokuapp.com",
+  baseURL: "https://humankynd.herokuapp.com",
 });
 
 // local
