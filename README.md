@@ -5,16 +5,16 @@ Start with the why and we'll take care of the how.  HumanKynd is a crowdsource +
 ![image](https://user-images.githubusercontent.com/94336773/204435105-05785e98-0961-4316-bd7e-897c09651a43.png)
 
 # **Table of Contents**
-1. [Final Deliverables](#hackathon-final-deliverables) 
+1. [Submission](#view-our-submission) 
 2.  [Problem](#problem-how-do-we-increase-the-total-amount-of-social-good-in-our-community) 
 3. [Solution](#our-solution)
 4. [Slide Deck](#slide-deck)
 5. [Tech Stack](#tech-stack)
 6. [Contributions](#contributions)
 
-# Hackathon Final Deliverables
-- [Submission](https://devpost.com/software/humankynd)
-- [Video](https://youtu.be/sOoozI3wxjo)
+# View Our Submission
+- [Full Submission](https://devpost.com/software/humankynd)
+- [Watch on YouTube](https://youtu.be/sOoozI3wxjo)
 - [Slide Deck](https://drive.google.com/file/d/16PCWAqhjEFvXcTZAmyP6mFx402bta1FY/view?usp=sharing)
 
 
