@@ -120,10 +120,11 @@ const CreateProfile = () => {
             <div className="create-profile-col__left">
               <div className="page-label">
                 <h1 className="title">
-                  Start with your why and we’ll take care of the how~
+                  Start with your why and we’ll take care of the how.
                 </h1>
                 <h3>
-                  Create a profile and find ways to be kind in your community.
+                  Create a profile and find ways to be kind in your community.{" "}
+                  <br />
                   <span className="bold"> Ready to make a difference?</span>
                 </h3>
               </div>
@@ -138,7 +139,12 @@ const CreateProfile = () => {
                   I'm Ready
                 </button>
               </div>
-              <Link to="/login">Already Have An Account? Login</Link>
+              <Link to="/login" className="link">
+                Already Have An Account? Login
+              </Link>
+              <a href="https://devpost.com/software/humankynd">
+                Winner of the Give Back Hacks 3 Hackathon
+              </a>
             </div>
             <div className="create-profile-col__right">
               <img
