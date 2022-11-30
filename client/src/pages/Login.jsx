@@ -94,7 +94,7 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="login-form">
             <div className="label-col-container">
               <label htmlFor="username" className="create-profile__label">
-                Username (user@gmail.com)
+                Username (Test User: "user@gmail.com")
               </label>
               <input
                 onChange={(e) => {
@@ -111,7 +111,7 @@ const Login = () => {
             </div>
             <div className="label-col-container">
               <label htmlFor="pwd" className="create-profile__label mb-1">
-                Password
+                Password (Test Password: "password")
               </label>
               <input
                 type="password"
