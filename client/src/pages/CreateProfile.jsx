@@ -120,7 +120,7 @@ const CreateProfile = () => {
             <div class="create-profile-col__left">
               <div class="page-label">
                 <h1 class="title">
-                  Start with your why and we’ll take care of the how.
+                  Start with your why and we’ll take care of the how~
                 </h1>
                 <h3>
                   Create a profile and find ways to be kind in your community.

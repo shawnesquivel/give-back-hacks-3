@@ -155,7 +155,7 @@ const Login = () => {
                 </Link>
               </p>
               <p className="register__text register__text--subtle">
-                New here?{" "}
+                Dashboard
                 <Link
                   to="/dashboard"
                   className="register__text register__text--subtle text--underline"
